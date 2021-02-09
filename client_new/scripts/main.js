@@ -4,9 +4,10 @@ requirejs.config({
         autolinker: '../../node_modules/autolinker/dist/Autolinker',
         classnames: '../../node_modules/classnames/index',
         lodash: '../../node_modules/lodash/index',
-        react: '../../node_modules/react/dist/react-with-addons',
+        //react: '../../node_modules/react/dist/react-with-addons',
+        react: 'https://unpkg.com/react@17/umd/react.production.min',
         seedrandom: '../../node_modules/seedrandom/seedrandom',
-        socketio: '../../node_modules/socket.io-client/socket.io',
+        socketio: '../../node_modules/socket.io-client/dist/socket.io.min',
         mousetrap: '../../node_modules/mousetrap/mousetrap',
         screenfull: '../../node_modules/screenfull/dist/screenfull' 
     },
