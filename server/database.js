@@ -10,6 +10,7 @@ var speakeasy = require('speakeasy');
 var m = require('multiline');
 
 var databaseUrl = config.DATABASE_URL;
+var pool = new pg.Pool();
 
 if (!databaseUrl)
     throw new Error('must set DATABASE_URL environment var');
@@ -20,10 +21,15 @@ pg.types.setTypeParser(20, function(val) { // parse int8 as an integer
     return val === null ? null : parseInt(val);
 });
 
-// callback is called with (err, client, done)
+pool.on('error', (err, client) => {
+    console.error('Unexpected error on idle client', err)
+    process.exit(-1)
+  })
+
 function connect(callback) {
-    return pg.connect(databaseUrl, callback);
-}
+    pool.connect();
+}// callback is called with (err, client, done)
+
 
 function query(query, params, callback) {
     //third parameter is optional
@@ -52,13 +58,8 @@ function query(query, params, callback) {
     }
 }
 
+
 exports.query = query;
-
-pg.on('error', function(err) {
-    console.error('POSTGRES EMITTED AN ERROR', err);
-});
-
-
 // runner takes (client, callback)
 
 // callback should be called with (err, data)
@@ -662,7 +663,7 @@ exports.getChatTable = function(limit, channelName, callback) {
     assert(typeof limit === 'number');
     var sql = "SELECT chat_messages.created AS date, 'say' AS type, users.username, users.userclass AS role, chat_messages.message, is_bot AS bot " +
         "FROM chat_messages JOIN users ON users.id = chat_messages.user_id WHERE channel = $1 ORDER BY chat_messages.id DESC LIMIT $2";
-    query(sql, [channelName, limit], function(err, data) {
+    client.query(sql, [channelName, limit], function(err, data) {
         if(err)
             return callback(err);
         callback(null, data.rows);
@@ -676,7 +677,7 @@ exports.getAllChatTable = function(limit, callback) {
      SELECT chat_messages.created AS date, 'say' AS type, users.username, users.userclass AS role, chat_messages.message, is_bot AS bot, chat_messages.channel AS "channelName"
      FROM chat_messages JOIN users ON users.id = chat_messages.user_id WHERE channel <> 'moderators'  ORDER BY chat_messages.id DESC LIMIT $1
     */});
-    query(sql, [limit], function(err, data) {
+    client.query(sql, [limit], function(err, data) {
         if(err)
             return callback(err);
         callback(null, data.rows);

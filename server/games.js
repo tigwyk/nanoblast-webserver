@@ -1,7 +1,8 @@
  var assert = require('better-assert');
  var async = require('async');
- var timeago = require('timeago');
+ //var timeago = require('timeago');
  var database = require('./database');
+ const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
 
  /**
   * GET
@@ -26,7 +27,7 @@ exports.show = function(req, res, next) {
             if (err)
                 return next(new Error('Unable to get game information: \n' + err)); //If getGame worked this should work too
 
-            game.timeago = timeago(game.created);
+            game.timeago = rtf1.format(game.created);
             res.render('game', { game: game, plays: plays, user: user });
         });
     });

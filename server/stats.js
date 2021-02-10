@@ -1,6 +1,6 @@
 var database = require('./database');
-var timeago = require('timeago');
 var config = require('../config/config');
+const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
 
 var stats;
 var generated;
@@ -29,6 +29,6 @@ exports.index = function(req, res, next) {
 
     stats.bankroll_offset = bankrollOffset;
 
-    res.render('stats', { user: user, generated: timeago(generated), stats: stats });
+    res.render('stats', { user: user, generated: rtf1.format(generated), stats: stats });
 
 };

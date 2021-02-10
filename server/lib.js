@@ -1,12 +1,12 @@
 var assert = require('better-assert');
-var bitcoinjs = require('bitcoinjs-lib');
+//var bitcoinjs = require('bitcoinjs-lib');
 var crypto = require('crypto');
 var config = require('../config/config');
 
 var encKey = config.ENC_KEY;
 
 exports.encrypt = function (text) {
-    var cipher = crypto.createCipher('aes-256-cbc', encKey);
+    var cipher = crypto.createCipheriv('aes-256-cbc', encKey);
     var crypted = cipher.update(text,'utf8','hex');
     crypted += cipher.final('hex');
     return crypted;
@@ -79,10 +79,11 @@ if (!derivedPubKey)
     throw new Error('Must set env var BIP32_DERIVED_KEY');
 
 
-var hdNode = bitcoinjs.HDNode.fromBase58(derivedPubKey);
+//var hdNode = bitcoinjs.HDNode.fromBase58(derivedPubKey);
 
 exports.deriveAddress = function(index) {
-    return hdNode.derive(index).pubKey.getAddress().toString();
+    //return hdNode.derive(index).pubKey.getAddress().toString();
+    return "bitcoinplaceholderaddress"
 };
 
 exports.formatSatoshis = function(n, decimals) {

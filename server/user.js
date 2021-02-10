@@ -2,7 +2,7 @@ var assert = require('better-assert');
 var async = require('async');
 var bitcoinjs = require('bitcoinjs-lib');
 var request = require('request');
-var timeago = require('timeago');
+const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
 var lib = require('./lib');
 var database = require('./database');
 var withdraw = require('./withdraw');
@@ -211,7 +211,7 @@ exports.profile = function(req, res, next) {
             assert(plays);
 
             plays.forEach(function(play) {
-                play.timeago = timeago(play.created);
+                play.timeago = rtf1.format(play.created);
             });
 
             var previousPage;

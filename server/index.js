@@ -21,26 +21,6 @@ var lib = require('./lib');
 
 debug('booting bustabit webserver');
 
-/** TimeAgo Settings:
- * Simplify and de-verbosify timeago output.
- **/
-var timeago = require('timeago');
-var timeago_strings = _.extend(timeago.settings.strings, {
-  seconds: '< 1 min',
-  minute: '1 min',
-  minutes: '%d mins',
-  hour: '1 hour',
-  hours: '%d hours',
-  day: '1 day',
-  days: '%d days',
-  month: '1 month',
-  months: '%d months',
-  year: '1 year',
-  years: '%d years'
-});
-timeago.settings.strings = timeago_strings;
-
-
 /** Render Engine
  *
  * Put here render engine global variable trough app.locals
