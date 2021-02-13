@@ -1,18 +1,18 @@
 var assert = require('assert');
-var bc = require('./bitcoin_client');
+var nano = require('./nano_client');
 var db = require('./database');
 var request = require('request');
 var config = require('../config/config');
 
 // Doesn't validate
-module.exports = function(userId, satoshis, withdrawalAddress, withdrawalId, callback) {
+module.exports = function(userId, nanos, withdrawalAddress, withdrawalId, callback) {
     var minWithdraw = config.MINING_FEE + 100;
     assert(typeof userId === 'number');
-    assert(satoshis >= minWithdraw);
+    assert(nanos >= minWithdraw);
     assert(typeof withdrawalAddress === 'string');
     assert(typeof callback === 'function');
 
-    db.makeWithdrawal(userId, satoshis, withdrawalAddress, withdrawalId, function (err, fundingId) {
+    db.makeWithdrawal(userId, nanos, withdrawalAddress, withdrawalId, function (err, fundingId) {
         if (err) {
             if (err.code === '23514')
                 callback('NOT_ENOUGH_MONEY');
@@ -25,8 +25,8 @@ module.exports = function(userId, satoshis, withdrawalAddress, withdrawalId, cal
 
         assert(fundingId);
 
-        var amountToSend = (satoshis - config.MINING_FEE) / 1e8;
-        bc.sendToAddress(withdrawalAddress, amountToSend, function (err, hash) {
+        var amountToSend = (nanos - config.MINING_FEE) / 1e8;
+        nano.sendToAddress(withdrawalAddress, amountToSend, function (err, hash) {
             if (err) {
                 if (err.message === 'Insufficient funds')
                     return callback('PENDING');
