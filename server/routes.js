@@ -7,7 +7,9 @@ var games = require('./games');
 var sendEmail = require('./sendEmail');
 var stats = require('./stats');
 var config = require('../config/config');
-var recaptchaValidator = require('recaptcha-validator');
+//var recaptchaValidator = require('recaptcha-validator');
+//var Recaptcha = require('express-recaptcha').RecaptchaV2;
+var request = require('request');
 
 
 var production = process.env.NODE_ENV === 'production';
@@ -84,23 +86,25 @@ function adminRestrict(req, res, next) {
 }
 
 function recaptchaRestrict(req, res, next) {
-  var recaptcha = lib.removeNullsAndTrim(req.body['g-recaptcha-response']);
-  if (!recaptcha) {
-    return res.send('No recaptcha submitted, go back and try again');
+var recaptcha_response = lib.removeNullsAndTrim(req.body['g-recaptcha-response']);
+  // g-recaptcha-response is the key that browser will generate upon form submit.
+  // if its blank or null means user has not selected the captcha, so return the error.
+  if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+    return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
   }
-
-  recaptchaValidator.callback(config.RECAPTCHA_PRIV_KEY, recaptcha, req.ip, function(err) {
-    if (err) {
-      if (typeof err === 'string')
-        res.send('Got recaptcha error: ' + err + ' please go back and try again');
-      else {
+  // Put your secret key here.
+  var secretKey = config.RECAPTCHA_PRIV_KEY;
+  // req.connection.remoteAddress will provide IP address of connected user.
+  var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + recaptcha_response + "&remoteip=" + req.connection.remoteAddress;
+  // Hitting GET request to the URL, Google will respond with success or error scenario.
+  request(verificationUrl,function(error,response,body) {
+    body = JSON.parse(body);
+    // Success will be true or false depending upon captcha validation.
+    if(body.success !== undefined && !body.success) {
         console.error('[INTERNAL_ERROR] Recaptcha failure: ', err);
-        res.render('error');
-      }
-      return;
+        return res.render('error');
     }
-
-    next();
+    return next();
   });
 }
 
