@@ -90,7 +90,7 @@ var recaptcha_response = lib.removeNullsAndTrim(req.body['g-recaptcha-response']
   // g-recaptcha-response is the key that browser will generate upon form submit.
   // if its blank or null means user has not selected the captcha, so return the error.
   if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
-    return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
+    return res.send('No recaptcha submitted, go back and try again');
   }
   // Put your secret key here.
   var secretKey = config.RECAPTCHA_PRIV_KEY;
