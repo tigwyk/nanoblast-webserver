@@ -101,11 +101,13 @@ var recaptcha_response = lib.removeNullsAndTrim(req.body['g-recaptcha-response']
     body = JSON.parse(body);
     // Success will be true or false depending upon captcha validation.
     if(body.success !== undefined && !body.success) {
-        console.error('[INTERNAL_ERROR] Recaptcha failure: ', err);
+        console.error('[INTERNAL_ERROR] Recaptcha failure: ', error);
         return res.render('error');
+    } else {
+        return;
     }
-    return next();
   });
+  next();
 }
 
 

@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var socketIO = require('socket.io');
 var ioCookieParser = require('socket.io-cookie');
+const dotenv = require('dotenv');
 var _ = require('lodash');
 var debug = require('debug')('app:index');
 var app = express();
@@ -19,8 +20,9 @@ var database = require('./database');
 var Chat = require('./chat');
 var lib = require('./lib');
 
-debug('booting bustabit webserver');
-
+debug('booting nanoblast webserver');
+debug('loading config overwrites from .env');
+dotenv.config();
 /** Render Engine
  *
  * Put here render engine global variable trough app.locals
