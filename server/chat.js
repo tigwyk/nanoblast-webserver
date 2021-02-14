@@ -112,7 +112,7 @@ Chat.prototype.join = function(socket, channelName) {
 
     //Check channelName variable and avoid users to join the mods channel
     if(isChannelNameInvalid(channelName) || isChannelNameModsOnly(channelName))
-        return sendError(socket, '[join] Invalid channel name');
+        return sendError(socket, '[join] Invalid channel name: ',channelName);
 
     //Check if the channel is moderators only
     if(SPECIAL_CHANNELS.hasOwnProperty(channelName))

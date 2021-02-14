@@ -9,13 +9,15 @@ var passwordHash = require('password-hash');
 var speakeasy = require('speakeasy');
 var m = require('multiline');
 
-var databaseUrl = config.DATABASE_URL;
-var pool = new pg.Pool();
+var databaseUrl = "postgres://"+process.env.PGUSER+":"+process.env.PGPASSWORD+"@"+process.env.PGHOST+"/"+process.env.PGDATABASE;
+var pool = new pg.Pool({
+    connectionString: databaseUrl
+});
 
 if (!databaseUrl)
-    throw new Error('must set DATABASE_URL environment var');
+    throw new Error('must set PGHOST environment var');
 
-console.log('DATABASE_URL: ', databaseUrl);
+console.log('PGHOST: ', databaseUrl);
 
 pg.types.setTypeParser(20, function(val) { // parse int8 as an integer
     return val === null ? null : parseInt(val);
@@ -27,7 +29,8 @@ pool.on('error', (err, client) => {
   })
 
 function connect(callback) {
-    pool.connect();
+    console.log("Entering database.connect");
+    pool.connect(callback);
 }// callback is called with (err, client, done)
 
 
@@ -68,9 +71,11 @@ exports.query = query;
 // callback takes (err, data)
 
 function getClient(runner, callback) {
+    console.log("Entering database.getClient");
     doIt();
 
     function doIt() {
+        console.log("Entering database.getClient.doIt");
         connect(function (err, client, done) {
             if (err) return callback(err);
 
@@ -109,7 +114,7 @@ function getClient(runner, callback) {
 //Returns a sessionId
 exports.createUser = function(username, password, email, ipAddress, userAgent, callback) {
     assert(username && password);
-
+    console.log("Entering database.createUser");
     getClient(
         function(client, callback) {
             var hashedPassword = passwordHash.generate(password);
@@ -663,7 +668,7 @@ exports.getChatTable = function(limit, channelName, callback) {
     assert(typeof limit === 'number');
     var sql = "SELECT chat_messages.created AS date, 'say' AS type, users.username, users.userclass AS role, chat_messages.message, is_bot AS bot " +
         "FROM chat_messages JOIN users ON users.id = chat_messages.user_id WHERE channel = $1 ORDER BY chat_messages.id DESC LIMIT $2";
-    client.query(sql, [channelName, limit], function(err, data) {
+    query(sql, [channelName, limit], function(err, data) {
         if(err)
             return callback(err);
         callback(null, data.rows);
@@ -677,7 +682,7 @@ exports.getAllChatTable = function(limit, callback) {
      SELECT chat_messages.created AS date, 'say' AS type, users.username, users.userclass AS role, chat_messages.message, is_bot AS bot, chat_messages.channel AS "channelName"
      FROM chat_messages JOIN users ON users.id = chat_messages.user_id WHERE channel <> 'moderators'  ORDER BY chat_messages.id DESC LIMIT $1
     */});
-    client.query(sql, [limit], function(err, data) {
+    query(sql, [limit], function(err, data) {
         if(err)
             return callback(err);
         callback(null, data.rows);

@@ -26,9 +26,9 @@ exports.contact = function(from, content, user, callback) {
 
     var details = {
         to: config.CONTACT_EMAIL,
-        from: 'contact@moneypot.com',
+        from: config.CONTACT_EMAIL,
         replyTo: from,
-        subject: 'Moneypot Contact (' + from + ')',
+        subject: 'Nanoblast Contact (' + from + ')',
         html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' +
             '<html xmlns="http://www.w3.org/1999/xhtml">' +
             '<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' +

@@ -7,8 +7,7 @@ var games = require('./games');
 var sendEmail = require('./sendEmail');
 var stats = require('./stats');
 var config = require('../config/config');
-//var recaptchaValidator = require('recaptcha-validator');
-//var Recaptcha = require('express-recaptcha').RecaptchaV2;
+
 var request = require('request');
 
 
@@ -85,6 +84,11 @@ function adminRestrict(req, res, next) {
     next();
 }
 
+var myTester = function(req, res, next) {
+    console.log('LOGGED:',req);
+    next();
+}
+
 function recaptchaRestrict(req, res, next) {
 var recaptcha_response = lib.removeNullsAndTrim(req.body['g-recaptcha-response']);
   // g-recaptcha-response is the key that browser will generate upon form submit.
@@ -102,12 +106,12 @@ var recaptcha_response = lib.removeNullsAndTrim(req.body['g-recaptcha-response']
     // Success will be true or false depending upon captcha validation.
     if(body.success !== undefined && !body.success) {
         console.error('[INTERNAL_ERROR] Recaptcha failure: ', error);
-        return res.render('error');
+        res.render('error');
     } else {
         return;
     }
   });
-  next();
+   next();
 }
 
 
@@ -146,7 +150,7 @@ function tableDev() {
 function requestDevOtt(id, callback) {
     var curl = require('curlrequest');
     var options = {
-        url: 'https://www.bustabit.com/ott',
+        url: 'https://localhost/ott',
         include: true ,
         method: 'POST',
         'cookie': 'id='+id
@@ -182,6 +186,7 @@ module.exports = function(app) {
     app.get('/calculator', staticPageLogged('calculator'));
     app.get('/guide', staticPageLogged('guide'));
 
+    app.get('/test', myTester, (req, res, next) => res.render('index'));
 
     app.get('/play-old', table());
     app.get('/play', tableNew());

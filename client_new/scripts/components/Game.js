@@ -113,7 +113,7 @@ define([
                         break;
                     case 'newUser':
                         messageContent = D.span(null,
-                            D.a({ href: "/request" }, "Welcome to bustabit.com, to start you have 2 free bits, bits you can request them here or you can just watch the current games... have fun :D")
+                            D.a({ href: "/request" }, "Welcome to Nanoblast, to start you have 2 free bits, bits you can request them here or you can just watch the current games... have fun :D")
                         );
                         messageClass = 'new-user';
                         break;

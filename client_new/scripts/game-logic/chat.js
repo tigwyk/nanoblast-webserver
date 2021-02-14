@@ -25,6 +25,7 @@ define([
 
         /** Chat channel currently in use **/
         self.channelName = Clib.localOrDef('channelName', 'english');
+        //self.channelName = 'english';
 
         /**
          * States of the chat:
@@ -81,7 +82,10 @@ define([
         /** Socket io is connected to the server **/
         self.ws.on('connect', function() {
             self.state = 'CONNECTED';
+            console.log(self.state);
+            console.log("joining channelName: ",self.channelName);
             self.ws.emit('join', self.channelName);
+            //self.ws.emit('join', 'english');
             self.trigger('connected');
         });
 

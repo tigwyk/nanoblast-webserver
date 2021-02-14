@@ -24,8 +24,9 @@ var sessionOptions = {
  * Register a user
  */
 exports.register  = function(req, res, next) {
+    console.log("Entering user.register");
     var values = _.merge(req.body, { user: {} });
-    var recaptcha = lib.removeNullsAndTrim(req.body['g-recaptcha-response']);
+    
     var username = lib.removeNullsAndTrim(values.user.name);
     var password = lib.removeNullsAndTrim(values.user.password);
     var password2 = lib.removeNullsAndTrim(values.user.confirm);
@@ -78,6 +79,7 @@ exports.register  = function(req, res, next) {
  * Login a user
  */
 exports.login = function(req, res, next) {
+    console.log("Entering user.login");
     var username = lib.removeNullsAndTrim(req.body.username);
     var password = lib.removeNullsAndTrim(req.body.password);
     var otp = lib.removeNullsAndTrim(req.body.otp);
