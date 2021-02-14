@@ -15,18 +15,7 @@ var rename = require("gulp-rename");
 var production = process.env.NODE_ENV === 'production';
 var configJsonPath = './config/build-config.json';
 
-gulp.task('build', callback => {
-    gulp.series(
-        'clean:build',
 
-        gulp.series('minify-js-old', 'minify-css-old', 'copy:assets-old'),
-        'hash-files-old',
-
-        gulp.series('minify-js-new', 'minify-css-new', 'copy:assets-new'),
-        'hash-files-new',
-    );
-    callback();
-  } );
 
 /** Delete build folder and config file if exist **/
 gulp.task('clean:build', callback => {
@@ -106,9 +95,7 @@ gulp.task('copy:assets-old', callback => {
 var hashOptions = {
     template: '<%= name %>-<%= hash %><%= ext %>'
 };
-gulp.task('hash-files-old', async function(callback) {
-    gulp.series('hash-css-game-old', 'hash-css-app-old', 'hash-js-old');
-});
+
 
 gulp.task('hash-css-game-old', callback => {
     return addToManifest(
@@ -161,7 +148,7 @@ gulp.task('hash-js-old', callback => {
 //
 //    return merge(replaceStream, mapStream);
 //});
-
+gulp.task('hash-files-old', gulp.series('hash-css-game-old', 'hash-css-app-old', 'hash-js-old'));
 
 /** ======================================== New Client ======================================== **/
 /** ============================================================================================ **/
@@ -225,9 +212,7 @@ gulp.task('copy:assets-new', callback => {
 var hashOptions = {
     template: '<%= name %>-<%= hash %><%= ext %>'
 };
-gulp.task('hash-files-new', async function(callback) {
-    gulp.series('hash-css-game-new', 'hash-css-game-theme-new', 'hash-css-app-new', 'hash-js-new');
-});
+
 
 gulp.task('hash-css-game-new', callback => {
     return addToManifest(
@@ -290,7 +275,7 @@ gulp.task('hash-js-new', callback => {
 //});
 
 
-
+gulp.task('hash-files-new', gulp.series('hash-css-game-new', 'hash-css-game-theme-new', 'hash-css-app-new', 'hash-js-new'));
 
 /** ======================================== Functions ========================================= **/
 /** ============================================================================================ **/
@@ -305,3 +290,11 @@ function addToManifest(srcStream) {
         .pipe(extend(configJsonPath, false, 4))
         .pipe(gulp.dest('.'));
 }
+
+gulp.task('build', gulp.series(
+    'clean:build',
+    'minify-js-old', 'minify-css-old', 'copy:assets-old',
+    'hash-files-old',
+    'minify-js-new', 'minify-css-new', 'copy:assets-new',
+    'hash-files-new',
+));
