@@ -433,7 +433,7 @@ exports.security = function(req, res) {
     assert(user);
 
     if (!user.mfa_secret) {
-        user.mfa_potential_secret = speakeasy.generate_key({ length: 32 }).base32;
+        user.mfa_potential_secret = speakeasy.generateSecret().base32;
         var qrUri = 'otpauth://totp/bustabit:' + user.username + '?secret=' + user.mfa_potential_secret + '&issuer=bustabit';
         user.qr_svg = qr.imageSync(qrUri, { type: 'svg' });
         user.sig = lib.sign(user.username + '|' + user.mfa_potential_secret);

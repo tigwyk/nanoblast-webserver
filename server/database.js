@@ -1,5 +1,7 @@
 var assert = require('assert');
 var uuid = require('uuid');
+const dotenv = require('dotenv');
+dotenv.config();
 var config = require('../config/config');
 
 var async = require('async');
@@ -29,7 +31,7 @@ pool.on('error', (err, client) => {
   })
 
 function connect(callback) {
-    console.log("Entering database.connect");
+    //console.log("Entering database.connect");
     pool.connect(callback);
 }// callback is called with (err, client, done)
 
@@ -229,12 +231,13 @@ function createSession(client, userId, ipAddress, userAgent, remember, callback)
 
         var session = res.rows[0];
         assert(session.id);
-
+        console.log("createSession db query");
         callback(null, session.id, expired);
     });
 }
 
 exports.createOneTimeToken = function(userId, ipAddress, userAgent, callback) {
+    console.log("creating OneTimeToken");
     assert(userId);
     var id = uuid.v4();
 

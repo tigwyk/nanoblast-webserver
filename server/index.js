@@ -13,16 +13,18 @@ const dotenv = require('dotenv');
 var _ = require('lodash');
 var debug = require('debug')('app:index');
 var app = express();
-
+debug('loading config overwrites from .env');
+dotenv.config();
 var config = require('../config/config');
+
+
 var routes = require('./routes');
 var database = require('./database');
 var Chat = require('./chat');
 var lib = require('./lib');
 
 debug('booting nanoblast webserver');
-debug('loading config overwrites from .env');
-dotenv.config();
+
 /** Render Engine
  *
  * Put here render engine global variable trough app.locals
@@ -163,12 +165,14 @@ io.use(ioCookieParser);
 /** Socket io login middleware **/
 io.use(function(socket, next) {
     debug('incoming socket connection');
+    console.log('incoming socket connection');
 
     var sessionId = (socket.request.headers.cookie)? socket.request.headers.cookie.id : null;
-
+    
     //If no session id or wrong the user is a guest
     if(!sessionId || !lib.isUUIDv4(sessionId)) {
         socket.user = false;
+        console.log("Session doesn't match user");
         return next();
     }
 
@@ -185,11 +189,13 @@ io.use(function(socket, next) {
                 //return socket.emit('err', 'INTERNAL_ERROR');
             }
             socket.user = false;
+            console.log("Failed to look up user in db");
             return next();
         }
 
         //Save the user info in the socket connection object
         socket.user = user;
+        console.log("Socket user is: ",socket.user);
         socket.user.admin = user.userclass === 'admin';
         socket.user.moderator = user.userclass === 'admin' || user.userclass === 'moderator';
         next();

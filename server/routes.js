@@ -6,6 +6,8 @@ var user = require('./user');
 var games = require('./games');
 var sendEmail = require('./sendEmail');
 var stats = require('./stats');
+const dotenv = require('dotenv');
+dotenv.config();
 var config = require('../config/config');
 
 var request = require('request');
@@ -81,11 +83,6 @@ function adminRestrict(req, res, next) {
             res.render('401'); //Not authorized page.
         return;
     }
-    next();
-}
-
-var myTester = function(req, res, next) {
-    console.log('LOGGED:',req);
     next();
 }
 
@@ -186,7 +183,7 @@ module.exports = function(app) {
     app.get('/calculator', staticPageLogged('calculator'));
     app.get('/guide', staticPageLogged('guide'));
 
-    app.get('/test', myTester, (req, res, next) => res.render('index'));
+    //app.get('/test', myTester, (req, res, next) => res.render('index'));
 
     app.get('/play-old', table());
     app.get('/play', tableNew());

@@ -21,7 +21,8 @@ define([
          */
         _.extend(this, Events);
 
-        self.ws = io(AppConstants.Engine.CHAT_HOST);
+        //self.ws = io(AppConstants.Engine.CHAT_HOST, {transports: ['websocket']});
+        self.ws = io();
 
         /** Chat channel currently in use **/
         self.channelName = Clib.localOrDef('channelName', 'english');
@@ -96,7 +97,7 @@ define([
             self.moderator = info.moderator;
 
             self.state = 'JOINED';
-
+            console.log(self.state);
             self.trigger('joined');
         });
 

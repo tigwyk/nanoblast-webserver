@@ -74,7 +74,7 @@ exports.isEligibleForGiveAway = function(lastGiveAway) {
     return Math.round(60 - timeElapsed);
 };
 
-var derivedPubKey = config.BIP32_DERIVED;
+var derivedPubKey = config.BIP32_DERIVED || "123456";
 if (!derivedPubKey)
     throw new Error('Must set env var BIP32_DERIVED_KEY');
 

@@ -87,6 +87,7 @@ function Chat(io) {
 
         //Join to a Room
         socket.on('join', function(channelName) {
+            console.log("Received join command for ",channelName);
             debug('join event received from user %s', socket.user ? socket.user.username : '~guest~');
             self.join(socket, channelName);
         });
