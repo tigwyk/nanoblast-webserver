@@ -43,7 +43,10 @@
                 <p class="account">
                     <b>Deposit Address:</b>
                     <input type="text" value="{{=it.user.deposit_address}}" readonly>
-                    <a href="bitcoin:{{=it.user.deposit_address}}?message=deposit">Bitcoin link</a>
+                    <a href="{{=it.user.deposit_uri}}">NANO link</a>
+                    <div class="large-5 columns">
+                        {{=it.user.deposit_qrcode}}
+                    </div>
                 </p>
                 {{?it.user.deposits.length > 0}}
                     <table>
@@ -58,7 +61,7 @@
                             {{~it.user.deposits :deposit:index}}
                                 <tr>
                                     <td>{{#def.format: {n: deposit.amount, decimals: 2 } }}</td>
-                                    <td><a href="https://blockchain.info/tx/{{=deposit.txid}}" target="_blank">link</a></td>
+                                    <td><a href="https://nanocrawler.cc/explorer/block/{{=deposit.txid}}" target="_blank">link</a></td>
                                     <td class="show-for-medium-up">{{=deposit.created}}</td>
                                 </tr>
                             {{~}}

@@ -544,11 +544,11 @@ exports.getPublicStats = function(username, callback) {
     );
 };
 
-exports.makeWithdrawal = function(userId, satoshis, withdrawalAddress, withdrawalId, callback) {
+exports.makeWithdrawal = function(userId, amount, withdrawalAddress, withdrawalId, callback) {
     assert(typeof userId === 'number');
-    assert(typeof satoshis === 'number');
+    assert(typeof amount === 'number');
     assert(typeof withdrawalAddress === 'string');
-    assert(satoshis > 10000);
+    assert(amount > 10000);
     assert(lib.isUUIDv4(withdrawalId));
 
     getClient(function(client, callback) {

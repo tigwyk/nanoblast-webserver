@@ -1,6 +1,6 @@
 var assert = require('better-assert');
 var async = require('async');
-var bitcoinjs = require('bitcoinjs-lib');
+//var bitcoinjs = require('bitcoinjs-lib');
 var request = require('request');
 const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
 var lib = require('./lib');
@@ -11,6 +11,8 @@ var speakeasy = require('speakeasy');
 var qr = require('qr-image');
 var uuid = require('uuid');
 var _ = require('lodash');
+const dotenv = require('dotenv');
+dotenv.config();
 var config = require('../config/config');
 
 var sessionOptions = {
@@ -327,6 +329,8 @@ exports.account = function(req, res, next) {
         user.giveaways = !giveaways.sum ? 0 : giveaways.sum;
         user.net_profit = net.profit;
         user.deposit_address = lib.deriveAddress(user.id);
+        user.deposit_uri = `nano:${user.deposit_address}?message=Nanoblast%20deposit`;
+        user.deposit_qrcode = qr.imageSync(user.deposit_uri, { type: 'svg' });
 
         res.render('account', { user: user });
     });
@@ -434,7 +438,7 @@ exports.security = function(req, res) {
 
     if (!user.mfa_secret) {
         user.mfa_potential_secret = speakeasy.generateSecret().base32;
-        var qrUri = 'otpauth://totp/bustabit:' + user.username + '?secret=' + user.mfa_potential_secret + '&issuer=bustabit';
+        var qrUri = 'otpauth://totp/nanoblast:' + user.username + '?secret=' + user.mfa_potential_secret + '&issuer=nanoblast';
         user.qr_svg = qr.imageSync(qrUri, { type: 'svg' });
         user.sig = lib.sign(user.username + '|' + user.mfa_potential_secret);
     }
@@ -467,7 +471,7 @@ exports.enableMfa = function(req, res, next) {
 
     if (otp !== expected) {
         user.mfa_potential_secret = secret;
-        var qrUri = 'otpauth://totp/bustabit:' + user.username + '?secret=' + secret + '&issuer=bustabit';
+        var qrUri = 'otpauth://totp/nanoblast:' + user.username + '?secret=' + secret + '&issuer=nanoblast';
         user.qr_svg = qr.imageSync(qrUri, {type: 'svg'});
         user.sig = sig;
 
@@ -623,6 +627,8 @@ exports.deposit = function(req, res, next) {
         }
         user.deposits = deposits;
         user.deposit_address = lib.deriveAddress(user.id);
+        user.deposit_uri = `nano:${user.deposit_address}?message=Nanoblast%20deposit`;
+        user.deposit_qrcode = qr.imageSync(user.deposit_uri, { type: 'svg' });
         res.render('deposit', { user:  user });
     });
 };

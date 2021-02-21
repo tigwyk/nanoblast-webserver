@@ -30,5 +30,6 @@ module.exports = {
   "BITCOIND_CERT": process.env.BITCOIND_CERT  || '',
   "PORT":  process.env.PORT || 3841,
   "MINING_FEE": process.env.MINING_FEE || 10000,
+  "NANO_ACCOUNT_SEED" : process.env.NANO_ACCOUNT_SEED,
   "BUILD": prodConfig
 };

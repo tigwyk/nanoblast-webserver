@@ -27,7 +27,7 @@ exports.show = function(req, res, next) {
             if (err)
                 return next(new Error('Unable to get game information: \n' + err)); //If getGame worked this should work too
 
-            game.timeago = rtf1.format(game.created);
+            game.timeago = game.created;
             res.render('game', { game: game, plays: plays, user: user });
         });
     });

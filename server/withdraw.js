@@ -2,17 +2,19 @@ var assert = require('assert');
 var nano = require('./nano_client');
 var db = require('./database');
 var request = require('request');
+const dotenv = require('dotenv');
+dotenv.config();
 var config = require('../config/config');
 
 // Doesn't validate
-module.exports = function(userId, nanos, withdrawalAddress, withdrawalId, callback) {
+module.exports = function(userId, amount, withdrawalAddress, withdrawalId, callback) {
     var minWithdraw = config.MINING_FEE + 100;
     assert(typeof userId === 'number');
-    assert(nanos >= minWithdraw);
+    assert(amount >= minWithdraw);
     assert(typeof withdrawalAddress === 'string');
     assert(typeof callback === 'function');
 
-    db.makeWithdrawal(userId, nanos, withdrawalAddress, withdrawalId, function (err, fundingId) {
+    db.makeWithdrawal(userId, amount, withdrawalAddress, withdrawalId, function (err, fundingId) {
         if (err) {
             if (err.code === '23514')
                 callback('NOT_ENOUGH_MONEY');
@@ -25,8 +27,8 @@ module.exports = function(userId, nanos, withdrawalAddress, withdrawalId, callba
 
         assert(fundingId);
 
-        var amountToSend = (nanos - config.MINING_FEE) / 1e8;
-        nano.sendToAddress(withdrawalAddress, amountToSend, function (err, hash) {
+        var amountToSend = (amount - config.MINING_FEE) / 1e8;
+        nano.send(process.env.NANO_ACCOUNT_SEED,withdrawalAddress, amountToSend, function (err, hash) {
             if (err) {
                 if (err.message === 'Insufficient funds')
                     return callback('PENDING');

@@ -1,7 +1,10 @@
 var assert = require('better-assert');
 //var bitcoinjs = require('bitcoinjs-lib');
 var crypto = require('crypto');
+const dotenv = require('dotenv');
+dotenv.config();
 var config = require('../config/config');
+var nanocurrency = require('nanocurrency');
 
 var encKey = config.ENC_KEY;
 
@@ -78,12 +81,17 @@ var derivedPubKey = config.BIP32_DERIVED || "123456";
 if (!derivedPubKey)
     throw new Error('Must set env var BIP32_DERIVED_KEY');
 
-
+var accountSeed = config.NANO_ACCOUNT_SEED;
+if (!accountSeed)
+    throw new Error('Must set env var NANO_ACCOUNT_SEED');
+console.log("NANO account dev seed: ",accountSeed);
 //var hdNode = bitcoinjs.HDNode.fromBase58(derivedPubKey);
 
 exports.deriveAddress = function(index) {
-    //return hdNode.derive(index).pubKey.getAddress().toString();
-    return "bitcoinplaceholderaddress"
+    var accountSecretKey = nanocurrency.deriveSecretKey(accountSeed, index);
+    var accountPublicKey = nanocurrency.derivePublicKey(accountSecretKey);
+    return nanocurrency.deriveAddress(accountPublicKey).replace(/(^xrb)/,"nano");
+    //return "bitcoinplaceholderaddress"
 };
 
 exports.formatSatoshis = function(n, decimals) {

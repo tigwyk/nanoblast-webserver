@@ -94,7 +94,7 @@ define([
             return D.div({ id: 'top-bar' },
                 D.div({ className: 'title' },
                     D.a({ href: '/' },
-                        D.h1(null, this.props.isMobileOrSmall? 'BaB' : 'bustabit')
+                        D.h1(null, this.props.isMobileOrSmall? 'nB' : 'nanoblast')
                     )
                 ),
                 userLogin,

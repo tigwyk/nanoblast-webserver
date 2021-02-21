@@ -23,7 +23,8 @@ define([
          */
         _.extend(this, Events);
 
-        self.ws = io(AppConstants.Engine.HOST);
+        self.ws = io(AppConstants.Engine.HOST, {transports: ['websocket'],path: AppConstants.Engine.GAME_PATH});
+        //self.ws = io();
 
         //Dev functions
         //window.disconnect = function() {
