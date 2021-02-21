@@ -21,8 +21,8 @@ define([
          */
         _.extend(this, Events);
 
-        //self.ws = io(AppConstants.Engine.CHAT_HOST, {transports: ['websocket']});
-        self.ws = io();
+        self.ws = io(AppConstants.Engine.CHAT_HOST, {transports: ['websocket'], path: AppConstants.Engine.CHAT_PATH});
+        //self.ws = io();
 
         /** Chat channel currently in use **/
         self.channelName = Clib.localOrDef('channelName', 'english');
