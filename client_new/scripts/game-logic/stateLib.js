@@ -83,8 +83,8 @@ define([
 
         /** Parse the bet string in rais and returns a integer **/
         parseBet: function(betStringRais) {
-          //return parseInt(betStringRais.replace(/k/g, '000')) * 100;
-          return betStringRais;
+          return parseInt(betStringRais.replace(/k/g, '000'));
+          //return betStringRais;
         },
 
         /** Convert the cash out string into an integer **/

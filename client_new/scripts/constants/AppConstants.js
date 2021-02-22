@@ -68,7 +68,7 @@ define(['lib/key-mirror'], function(KeyMirror){
             CHAT_HOST: '//localhost',
             GAME_PATH: '/gamesocket/socket.io',
             CHAT_PATH: '',
-            MAX_BET: 100000000 /** Max bet per game 1,000,000 rais, this will be calculated dynamically in the future, based on the invested amount in the casino **/
+            MAX_BET: 1000000 /** Max bet per game 1,000,000 rais, this will be calculated dynamically in the future, based on the invested amount in the casino **/
         },
 
         BetButton: {

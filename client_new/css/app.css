@@ -145,10 +145,13 @@ body {
 }
 
 .index .play-btn-cont .play {
+    padding: 0;
+    margin: 0;
     /* padding-top: 2rem; */
     display: block;
     width: 100%;
     /* top: calc(100% - 3em); */
+    height: calc(100% - 10px);
     line-height: 3em;
     text-align: center;
     color: white;
@@ -160,14 +163,13 @@ body {
     border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
-    -webkit-box-shadow: 0 6px 0 rgb(0, 0, 52),0px 9px 25px rgba(0,0,0,.1);
-    -moz-box-shadow: 0 6px 0 rgb(0, 0, 52),0px 9px 25px rgba(0,0,0,.1);
+    -webkit-box-shadow: 0px 6px 0px rgb(0, 0, 52),0px 9px 25px rgba(0,0,0,.1);
+    -moz-box-shadow: 0px 6px 0px rgb(0, 0, 52),0px 9px 25px rgba(0,0,0,.1);
     box-shadow: 0px 6px 0px rgb(0, 0, 52),0px 9px 25px rgba(0,0,0,0.1);
     margin-bottom: 10px;
     border: 0;
     outline: none;
     font-family: inherit;
-    margin: auto;
 }
 
 .index .play-btn-cont .play-old {

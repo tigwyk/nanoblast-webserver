@@ -86,12 +86,12 @@ define([
 
         _placeBet: function () {
 
-            var bet = parseInt(this.state.betSize.replace(/k/g, '000')) * 100;
+            var bet = parseInt(this.state.betSize.replace(/k/g, '000'));
             console.assert(_.isFinite(bet));
 
             var cashOut = parseFloat(this.state.cashOut);
             console.assert(_.isFinite(cashOut));
-            cashOut = Math.round(cashOut * 100);
+            cashOut = Math.round(cashOut);
             console.assert(_.isFinite(cashOut));
 
             ControlsActions.placeBet(bet, cashOut);

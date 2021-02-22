@@ -50,7 +50,7 @@ define([
             var bet = parseInt(betString.replace(/k/g, '000'));
 
             if (bet < 1)
-                return new Error('The bet should be at least 1 bit');
+                return new Error('The bet should be at least 1 rai');
 
             if (bet > AppConstants.Engine.MAX_BET)
                 return new Error('The bet must be less no more than ' + formatSatoshis(AppConstants.Engine.MAX_BET) + ' rais');

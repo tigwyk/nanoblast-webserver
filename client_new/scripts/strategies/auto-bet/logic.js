@@ -16,13 +16,13 @@ define(['game-logic/clib'], function(Clib){
 
         return function(engine) {
             //MoneyBot\n\
-            var baseBetSatoshis = settings.baseBet * 100;
-            var currentBet = baseBetSatoshis;
+            var baseBetRais = settings.baseBet;
+            var currentBet = baseBetRais;
 
             var onLossIncreaseQty = Number(settings.onLossIncreaseQty);
             var onWinIncreaseQty = Number(settings.onWinIncreaseQty);
             var autoCashAt = Number(settings.autoCashAt);
-            var maxBetStop = Number(settings.maxBetStop) * 100;
+            var maxBetStop = Number(settings.maxBetStop);
 
             console.assert(Clib.isNumber(autoCashAt));
 
@@ -31,26 +31,34 @@ define(['game-logic/clib'], function(Clib){
 
                 if (lastGamePlay == 'LOST') {
                     if(settings.onLossSelectedOpt == 'return_to_base')
-                        currentBet = baseBetSatoshis;
+                        currentBet = baseBetRais;
                     else { //increase_bet_by
                         console.assert(Clib.isNumber(onLossIncreaseQty));
                         currentBet = currentBet * onLossIncreaseQty;
                     }
                 } else if(lastGamePlay == 'WON') {
                     if(settings.onWinSelectedOpt == 'return_to_base')
-                        currentBet = baseBetSatoshis;
+                        currentBet = baseBetRais;
                     else {//increase_bet_by
                         console.assert(Clib.isNumber(onWinIncreaseQty));
                         currentBet = currentBet * onWinIncreaseQty;
                     }
                 }
 
-                var fixedCurrentBet = Math.round(currentBet / 100) * 100;
-
+                var fixedCurrentBet = Math.round(currentBet);
+                /*
+                console.log("Current bet: ",currentBet);
+                console.log(engine.getBalance());
+                */
                 if(fixedCurrentBet > 0 && fixedCurrentBet <= engine.getBalance() && fixedCurrentBet <= engine.getMaxBet() && fixedCurrentBet <= maxBetStop) {
-                    engine.placeBet(fixedCurrentBet, Math.round(autoCashAt * 100), false);
+                    engine.placeBet(fixedCurrentBet, Math.round(autoCashAt*100), false);
                 } else {
                     engine.stop();
+                    /*
+                    console.log("fixedCurrentBet: ",fixedCurrentBet);
+                    console.log("getMaxBet: ",engine.getMaxBet());
+                    console.log("maxBetStop: ",maxBetStop);
+                    */
                     console.log('You ran out of rais or exceeded the max bet or betting nothing :(');
                 }
             });

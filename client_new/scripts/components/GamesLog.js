@@ -65,7 +65,7 @@ define([
                     //If the player won
                     if (player.stopped_at) {
                         profit = ((player.stopped_at / 100) * player.bet) - player.bet;
-                        cashed_at = Clib.formatSatoshis(player.stopped_at);
+                        cashed_at = Clib.formatSatoshis(player.stopped_at/100);
 
                         //If the player lost
                     } else {
@@ -106,7 +106,7 @@ define([
                         D.a({ href: '/game/' + game.game_id, target: '_blank',
                             className: className
                         },
-                            Clib.formatSatoshis(game.game_crash), D.i(null, 'x'))
+                            Clib.formatSatoshis(game.game_crash/100), D.i(null, 'x'))
                         ),
                     D.td(null, cashed_at),
                     D.td(null, bet),

@@ -427,7 +427,7 @@ define([
     Engine.prototype.bet = function(amount, autoCashOut, callback) {
         console.assert(typeof amount == 'number');
         console.assert(Clib.isInteger(amount));
-        console.assert(!autoCashOut || (typeof autoCashOut === 'number' && autoCashOut >= 100));
+        console.assert(!autoCashOut || (typeof autoCashOut === 'number' && autoCashOut >= 1));
 
         if(!Clib.isInteger(amount) || !((amount%100) == 0))
             return console.error('The bet amount should be integer and divisible by 100');
@@ -580,7 +580,7 @@ define([
         //Get max bet and bonus pool
         for (var i = 0, length = playersArrSorted.length; i < length; ++i) {
             var bet = playersArrSorted[i].bet;
-            bonusPool += bet / 100;
+            bonusPool += bet * 0.01;
             largestBet = Math.max(largestBet, bet);
         }
 

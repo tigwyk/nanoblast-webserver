@@ -462,12 +462,13 @@ define([
      * @param {function} callback(err, result)
      */
     Engine.prototype.bet = function(amount, autoCashOut, callback) {
+        amount = Number(amount);
         console.assert(typeof amount == 'number');
         console.assert(Clib.isInteger(amount));
-        console.assert(!autoCashOut || (typeof autoCashOut === 'number' && autoCashOut >= 100));
+        console.assert(!autoCashOut || (typeof autoCashOut === 'number' && autoCashOut >= 1));
 
-        if(!Clib.isInteger(amount) || !((amount%100) == 0))
-            return console.error('The bet amount should be integer and divisible by 100');
+        if(!Clib.isInteger(amount))
+            return console.error('The bet amount should be integer');
 
         this.nextBetAmount = amount;
         this.nextAutoCashout = autoCashOut;
