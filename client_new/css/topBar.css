@@ -14,7 +14,7 @@
 }
 
 #top-bar .title h1 {
-    color: #e58929;
+    color: #4A90E2;
     line-height: 2rem;
     font-size: 1.5rem;
     font-weight: bold;
@@ -89,12 +89,12 @@
 
 /** User logged **/
 
-#top-bar .user-login .balance-bits {
+#top-bar .user-login .balance-rais {
     display: inline-block;
     padding-right: 0.5rem;
 }
 
-#top-bar .user-login .balance-bits span{
+#top-bar .user-login .balance-rais span{
     line-height: 2rem;
     color: black;
 }

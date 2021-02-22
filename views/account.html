@@ -63,29 +63,29 @@
             <div id="statistics" class="row">
                 <div class="columns data large-3">
                     <p><b>Deposits </b></p>
-                    <h5>{{#def.format:{n: it.user.deposits, decimals:2} }} bits</h5>
+                    <h5>{{#def.format:{n: it.user.deposits, decimals:2} }} rais</h5>
                 </div>
                 <div class="columns data large-3">
                     <p><b>Withdrawals </b></p>
-                    <h5>{{#def.format:{n: it.user.withdrawals, decimals:2} }} bits</h5>
+                    <h5>{{#def.format:{n: it.user.withdrawals, decimals:2} }} rais</h5>
                 </div>
                 <div class="columns data large-3">
-                    <p><b>Free Bits Collected </b></p>
+                    <p><b>Free Rais Collected </b></p>
                     <h5>{{#def.format:{n: it.user.giveaways, decimals:2} }}</h5>
                 </div>
                 <div class="columns data large-3">
                     <p><b>Net Profit</b></p>
-                    <h5>{{#def.format:{n: it.user.net_profit, decimals:2} }} Bits</h5>
+                    <h5>{{#def.format:{n: it.user.net_profit, decimals:2} }} Rais</h5>
                 </div>
             </div>
 
             <br>
             {{?typeof it.user.eligible !== 'number' }}
-                {{?it.user.balance_satoshis > 100}}
-                    <div class="success bits">You are eligible for a free 2 bits <a href="/request">CLICK HERE TO REQUEST THEM!</a></div>
+                {{?it.user.balance_rais > 1}}
+                    <div class="success rais">You are eligible for a free 2 rais <a href="/request">CLICK HERE TO REQUEST THEM!</a></div>
                 {{?}}
             {{??}}
-                <div class="success bits">You'll be eligible for 2 free bits in {{=it.user.eligible}} minutes</div>
+                <div class="success rais">You'll be eligible for 2 free rais in {{=it.user.eligible}} minutes</div>
             {{?}}
         </div>
     </div>

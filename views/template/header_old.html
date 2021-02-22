@@ -10,9 +10,9 @@
 
         <div class="show-for-small-up user-login">
         {{?it.user}}
-            <div class="balance-bits">
-                <span>Bits: </span>
-                <span class="balance" id="balance_bits">{{#def.format:{n: it.user.balance_satoshis, decimals:2} }}</span>
+            <div class="balance-rais">
+                <span>Rais: </span>
+                <span class="balance" id="balance_rais">{{#def.format:{n: it.user.balance_rais, decimals:2} }}</span>
             </div>
             <div class="username">
                 <a href="/account">{{=it.user.username}}</a>

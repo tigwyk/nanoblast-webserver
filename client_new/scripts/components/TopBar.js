@@ -17,7 +17,8 @@ define([
 
     function getState() {
         return {
-            balanceBitsFormatted: Clib.formatSatoshis(Engine.balanceSatoshis),
+            balanceRaisFormatted: Clib.formatSatoshis(Engine.balanceRais),
+            //balanceRaisFormatted: Engine.balanceRais,
             theme: GameSettingsStore.getCurrentTheme()//black || white
         }
     }
@@ -72,9 +73,9 @@ define([
             var userLogin;
             if(this.state.username) {
                 userLogin = D.div({ className: 'user-login' },
-                    D.div({ className: 'balance-bits' },
-                        D.span(null, 'Bits: '),
-                        D.span({ className: 'balance' }, this.state.balanceBitsFormatted )
+                    D.div({ className: 'balance-rais' },
+                        D.span(null, 'Rais: '),
+                        D.span({ className: 'balance' }, this.state.balanceRaisFormatted )
                     ),
                     D.div({ className: 'username' },
                         D.a({ href: '/account'}, this.state.username

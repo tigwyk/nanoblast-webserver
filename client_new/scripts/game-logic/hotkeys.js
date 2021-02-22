@@ -70,7 +70,7 @@ define([
     };
 
     Hotkeys.prototype._betCashout = function() {
-        var invalidBet = (StateLib.canUserBet(Engine.balanceSatoshis, this.state.betSize, this.state.betInvalid, this.state.cashOutInvalid) instanceof Error);
+        var invalidBet = (StateLib.canUserBet(Engine.balanceRais, this.state.betSize, this.state.betInvalid, this.state.cashOutInvalid) instanceof Error);
         var notPlaying = StateLib.notPlaying(Engine);
         var isBetting = StateLib.isBetting(Engine);
 

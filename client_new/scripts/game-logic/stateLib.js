@@ -81,9 +81,10 @@ define([
         /** ====== Controls Store ====== **/
 
 
-        /** Parse the bet string in bits and returns a integer **/
-        parseBet: function(betStringBits) {
-          return parseInt(betStringBits.replace(/k/g, '000')) * 100;
+        /** Parse the bet string in rais and returns a integer **/
+        parseBet: function(betStringRais) {
+          //return parseInt(betStringRais.replace(/k/g, '000')) * 100;
+          return betStringRais;
         },
 
         /** Convert the cash out string into an integer **/
@@ -96,17 +97,17 @@ define([
 
         /** ====== Mixed ====== **/
 
-        canUserBet: function(balanceSatoshis, betStringBits, betInvalid, autoCashOutInvalid) {
-            var betAmountSatoshis = this.parseBet(betStringBits);
+        canUserBet: function(balanceRais, betStringRais, betInvalid, autoCashOutInvalid) {
+            var betAmountRais = this.parseBet(betStringRais);
 
-            if(balanceSatoshis < 100)
-                return new Error('Not enough bits to play');
+            if(balanceRais < 1)
+                return new Error('Not enough rais to play');
             if(betInvalid)
                 return new Error(betInvalid);
             if(autoCashOutInvalid)
                 return new Error(autoCashOutInvalid);
-            if(balanceSatoshis < betAmountSatoshis)
-                return new Error('Not enough bits');
+            if(balanceRais < betAmountRais)
+                return new Error('Not enough rais');
 
             return true;
         }

@@ -26,12 +26,12 @@ exports.giveAwayHandle = function(req, res, next) {
     }
 
     var giveAwayUsers = req.body.users.split(/\s+/);
-    var bits = parseFloat(req.body.bits);
+    var rais = parseFloat(req.body.rais);
 
-    if (!Number.isFinite(bits) || bits <= 0)
-        return next('Problem with bits...');
+    if (!Number.isFinite(rais) || rais <= 0)
+        return next('Problem with rais...');
 
-    var satoshis = Math.round(bits * 100);
+    var satoshis = Math.round(rais);
 
     database.addRawGiveaway(giveAwayUsers, satoshis , function(err) {
         if (err) return res.redirect('/admin-giveaway?err=' + err);

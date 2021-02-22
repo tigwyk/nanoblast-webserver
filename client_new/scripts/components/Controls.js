@@ -23,7 +23,7 @@ define([
 
     function getState(){
         return {
-            betSize: ControlsStore.getBetSize(), //Bet input string in bits
+            betSize: ControlsStore.getBetSize(), //Bet input string in rais
             betInvalid: ControlsStore.getBetInvalid(), //false || string error message
             cashOut: ControlsStore.getCashOut(),
             cashOutInvalid: ControlsStore.getCashOutInvalid(), //false || string error message
@@ -137,7 +137,7 @@ define([
                             self._setBetSize(e.target.value);
                         }
                     }),
-                    D.span({ className: '' }, 'bits')
+                    D.span({ className: '' }, 'rais')
                 )
             );
             var autoCashContainer = D.div({ className: 'autocash-container', key: 'ci-2' },
@@ -221,7 +221,7 @@ define([
         //                D.b({className: 'green'}, pi.stopped_at / 100, 'x'),
         //                ' / Won: ',
         //                D.b({className: 'green'}, Clib.formatSatoshis(pi.bet * pi.stopped_at / 100)),
-        //                ' ', Clib.grammarBits(pi.bet * pi.stopped_at / 100)
+        //                ' ', Clib.grammarRais(pi.bet * pi.stopped_at / 100)
         //            );
         //
         //        } else { // user still in game
@@ -235,7 +235,7 @@ define([
         //            if (pi.bonus) {
         //                bonus = D.span(null, ' (+',
         //                    Clib.formatSatoshis(pi.bonus), ' ',
-        //                    Clib.grammarBits(pi.bonus), ' bonus)'
+        //                    Clib.grammarRais(pi.bonus), ' bonus)'
         //                );
         //            }
         //
@@ -243,7 +243,7 @@ define([
         //                D.b({className: 'green'}, pi.stopped_at / 100, 'x'),
         //                ' / Won: ',
         //                D.b({className: 'green'}, Clib.formatSatoshis(pi.bet * pi.stopped_at / 100)),
-        //                ' ', Clib.grammarBits(pi.bet * pi.stopped_at / 1000),
+        //                ' ', Clib.grammarRais(pi.bet * pi.stopped_at / 1000),
         //                bonus
         //            );
         //        } else if (pi) { // bet and lost
@@ -251,14 +251,14 @@ define([
         //            if (pi.bonus) {
         //                bonus = D.span(null, ' (+ ',
         //                    Clib.formatSatoshis(pi.bonus), ' ',
-        //                    Clib.grammarBits(pi.bonus), ' bonus)'
+        //                    Clib.grammarRais(pi.bonus), ' bonus)'
         //                );
         //            }
         //
         //            return D.span(null,
         //                'Busted @ ', D.b({className: 'red'},
         //                    this.state.engine.tableHistory[0].game_crash / 100, 'x'),
-        //                ' / You lost ', D.b({className: 'red'}, pi.bet / 100), ' ', Clib.grammarBits(pi.bet),
+        //                ' / You lost ', D.b({className: 'red'}, pi.bet / 100), ' ', Clib.grammarRais(pi.bet),
         //                bonus
         //            );
         //

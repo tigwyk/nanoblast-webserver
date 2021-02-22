@@ -6,7 +6,7 @@ define(['game-logic/clib'], function(Clib){
         /**
          * Initial conditions object
          *  @param {object} settings
-         *  @param {number} settings.baseBet - Base bet in bits
+         *  @param {number} settings.baseBet - Base bet in rais
          *  @param {number} settings.autoCashAt
          *  @param {string} settings.onLossSelectedOpt - Options: return_to_base(def), increase_bet_by
          *  @param {number/null} settings.onLossIncreaseQty
@@ -51,7 +51,7 @@ define(['game-logic/clib'], function(Clib){
                     engine.placeBet(fixedCurrentBet, Math.round(autoCashAt * 100), false);
                 } else {
                     engine.stop();
-                    console.log('You ran out of bits or exceeded the max bet or betting nothing :(');
+                    console.log('You ran out of rais or exceeded the max bet or betting nothing :(');
                 }
             });
         }

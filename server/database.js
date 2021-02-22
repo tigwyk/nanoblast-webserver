@@ -271,7 +271,7 @@ exports.getUserFromUsername = function(username, callback) {
 
         assert(data.rows.length === 1);
         var user = data.rows[0];
-        assert(typeof user.balance_satoshis === 'number');
+        assert(typeof user.balance_rais === 'number');
 
         callback(null, user);
     });
@@ -314,7 +314,8 @@ exports.getUserBySessionId = function(sessionId, callback) {
         assert(data.length === 1);
 
         var user = data[0];
-        assert(typeof user.balance_satoshis === 'number');
+        console.log("User: ",user);
+        assert(typeof user.balance_rais === 'number');
 
         callback(null, user);
     });
@@ -397,7 +398,7 @@ exports.getGamesPlays = function(gameId, callback) {
 
 function addSatoshis(client, userId, amount, callback) {
 
-    client.query('UPDATE users SET balance_satoshis = balance_satoshis + $1 WHERE id = $2', [amount, userId], function(err, res) {
+    client.query('UPDATE users SET balance_rais = balance_rais + $1 WHERE id = $2', [amount, userId], function(err, res) {
         if (err) return callback(err);
         assert(res.rowCount === 1);
         callback(null);
@@ -441,7 +442,7 @@ exports.addGiveaway = function(userId, callback) {
                     return callback({ message: 'NOT_ELIGIBLE', time: eligible});
                 }
 
-                var amount = 200; // 2 bits
+                var amount = 2; // 2 rais
                 client.query('INSERT INTO giveaways(user_id, amount) VALUES($1, $2) ', [userId, amount], function(err) {
                     if (err) return callback(err);
 
@@ -466,7 +467,7 @@ exports.addRawGiveaway = function(userNames, amount, callback) {
             return function(callback) {
 
                 client.query('SELECT id FROM users WHERE lower(username) = lower($1)', [username], function(err, result) {
-                    if (err) return callback('unable to add bits');
+                    if (err) return callback('unable to add rais');
 
                     if (result.rows.length === 0) return callback(username + ' didnt exists');
 
@@ -553,7 +554,7 @@ exports.makeWithdrawal = function(userId, amount, withdrawalAddress, withdrawalI
 
     getClient(function(client, callback) {
 
-        client.query("UPDATE users SET balance_satoshis = balance_satoshis - $1 WHERE id = $2",
+        client.query("UPDATE users SET balance_rais = balance_rais - $1 WHERE id = $2",
             [satoshis, userId], function(err, response) {
             if (err) return callback(err);
 

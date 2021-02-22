@@ -13,12 +13,12 @@ CREATE TABLE users (
     email text,
     password text NOT NULL,
     mfa_secret text,
-    balance_satoshis bigint DEFAULT 0 NOT NULL,
+    balance_rais bigint DEFAULT 0 NOT NULL,
     gross_profit bigint DEFAULT 0 NOT NULL,
     net_profit bigint DEFAULT 0 NOT NULL,
     games_played bigint DEFAULT 0 NOT NULL,
     userclass UserClassEnum DEFAULT 'user' NOT NULL,
-    CONSTRAINT users_balance_satoshis_check CHECK ((balance_satoshis >= 0))
+    CONSTRAINT users_balance_rais_check CHECK ((balance_rais >= 0))
 );
 
 ALTER TABLE ONLY users
@@ -204,7 +204,7 @@ CREATE VIEW users_view AS
     u.email,
     u.password,
     u.mfa_secret,
-    u.balance_satoshis,
+    u.balance_rais,
     ( SELECT max(giveaways.created) AS max
            FROM giveaways
           WHERE (giveaways.user_id = u.id)) AS last_giveaway,

@@ -33,7 +33,7 @@ define([
         self.username = null;
 
         /** The balance of the user */
-        self.balanceSatoshis = null;
+        self.balanceRais = null;
 
         /** Max bet will be sent by the server in the future, for now is a constant **/
         self.maxBet = AppConstants.Engine.MAX_BET;
@@ -148,7 +148,7 @@ define([
 
             Object.keys(bets).forEach(function(username) {
                 if (self.username === username)
-                    self.balanceSatoshis -= bets[username];
+                    self.balanceRais -= bets[username];
 
                 self.playerInfo[username] = { bet: bets[username] };
             });
@@ -210,7 +210,7 @@ define([
                 console.assert(self.playerInfo[user]);
                 self.playerInfo[user].bonus = data.bonuses[user]; //TODO: Deprecate sending bonuses to the client?
                 if (self.username === user) {
-                    self.balanceSatoshis += data.bonuses[user];
+                    self.balanceRais += data.bonuses[user];
                 }
             }
 
@@ -301,7 +301,7 @@ define([
 
             if (self.username === resp.username) {
                 self.cashingOut = false;
-                self.balanceSatoshis += self.playerInfo[resp.username].bet * resp.stopped_at / 100;
+                self.balanceRais += self.playerInfo[resp.username].bet * resp.stopped_at / 100;
             }
 
             self.calcBonuses();
@@ -360,7 +360,7 @@ define([
                             return;
                         }
 
-                        self.balanceSatoshis = resp.balance_satoshis;
+                        self.balanceRais = resp.balance_rais;
                         self.chat = resp.chat;
 
                         /** If username is a falsey value the user is not logged in */
@@ -420,7 +420,7 @@ define([
 
     /**
      * Places a bet with a giving amount.
-     * @param {number} amount - Bet amount in bits
+     * @param {number} amount - Bet amount in rais
      * @param {number} autoCashOut - Percentage of self cash out
      * @param {function} callback(err, result)
      */
@@ -584,7 +584,7 @@ define([
             largestBet = Math.max(largestBet, bet);
         }
 
-        //The ratio bits per bit bet
+        //The ratio rais per bit bet
         var maxWinRatio = bonusPool / largestBet;
 
         slideSameStoppedAt(playersArrSorted,

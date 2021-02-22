@@ -81,9 +81,9 @@ define([
 
     function calculatePlayingPercentages(engine) {
         /**
-         * bitsPlaying: The total amount of bits playing(not cashed) minus your qty if you are playing
-         * bitsCashedOut: The total amount of bits cashed before you if you are playing, if you are not its the total cashed out amount minus your qty
-         * bitsCashedOutAfterMe: If you are playing...
+         * raisPlaying: The total amount of rais playing(not cashed) minus your qty if you are playing
+         * raisCashedOut: The total amount of rais cashed before you if you are playing, if you are not its the total cashed out amount minus your qty
+         * raisCashedOutAfterMe: If you are playing...
          * myBet: guess!
          */
 
@@ -97,7 +97,7 @@ define([
             }
         }
 
-        var bitsPlaying = 0, bitsCashedOut = 0, bitsCashedOutAfterMe = 0;
+        var raisPlaying = 0, raisCashedOut = 0, raisCashedOutAfterMe = 0;
 
         var currentPlay = engine.currentPlay();
 
@@ -108,21 +108,21 @@ define([
             if(username !== engine.username)
                 if(player.stopped_at) {
                     if(player.stopped_at > myStop)
-                        bitsCashedOutAfterMe += player.bet;
+                        raisCashedOutAfterMe += player.bet;
                     else
-                        bitsCashedOut += player.bet;
+                        raisCashedOut += player.bet;
 
                 } else {
-                    bitsPlaying+= player.bet;
+                    raisPlaying+= player.bet;
                 }
         });
 
-        var totalAmountPlaying = bitsPlaying + bitsCashedOut + bitsCashedOutAfterMe + myBet;
+        var totalAmountPlaying = raisPlaying + raisCashedOut + raisCashedOutAfterMe + myBet;
 
         return {
-            playingLost: bitsPlaying / totalAmountPlaying * 100,
-            cashedWon: bitsCashedOut / totalAmountPlaying * 100,
-            cashedWonAfter: bitsCashedOutAfterMe / totalAmountPlaying * 100,
+            playingLost: raisPlaying / totalAmountPlaying * 100,
+            cashedWon: raisCashedOut / totalAmountPlaying * 100,
+            cashedWonAfter: raisCashedOutAfterMe / totalAmountPlaying * 100,
             me: myBet / totalAmountPlaying * 100
         };
     }

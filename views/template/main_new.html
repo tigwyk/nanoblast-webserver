@@ -1,4 +1,4 @@
-{{##def.format:param:{{=(param.n/100).toFixed(param.decimals).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}#}}
+{{##def.format:param:{{=(param.n).toFixed(param.decimals).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}#}}
 
 <!DOCTYPE html>
 <html>
@@ -21,21 +21,21 @@
     </div>
     {{??it.user.advice == 'new'}}
     <div class="success-wrap">
-        Welcome to nanoblast, to start you have 2 free mNano, bits
+        Welcome to nanoblast, to start you have 2 free rai, rai
         <a href="/request">you can request them here</a> or you can just watch the current games... have fun :D
 
     </div>
     {{??it.user.advice == 'received'}}
     <div class="success-wrap">
-        Congratulations you have been credited 2 free mNano. Have fun!
+        Congratulations you have been credited 2 free rai. Have fun!
     </div>
     {{?? it.user.advice}}
     <div class="success-wrap">
         {{!it.user.advice}}
     </div>
-    {{??it.user && it.user.balance_satoshis < 100 }}
+    {{??it.user && it.user.balance_rais < 1 }}
     {{?it.user.eligible == true}}
-    <div class="success-wrap"><a href="/request">Collect your free mNano!</a></div>
+    <div class="success-wrap"><a href="/request">Collect your free rai!</a></div>
     {{?}}
     {{?}}
 

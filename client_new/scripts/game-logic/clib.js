@@ -11,7 +11,7 @@ define([
     var rng;
 
     function formatSatoshis(n, decimals) {
-        return formatDecimals(n/100, decimals);
+        return formatDecimals(n, decimals);
     }
 
     function formatDecimals (n, decimals) {
@@ -52,8 +52,8 @@ define([
             if (bet < 1)
                 return new Error('The bet should be at least 1 bit');
 
-            if (bet * 100 > AppConstants.Engine.MAX_BET)
-                return new Error('The bet must be less no more than ' + formatSatoshis(AppConstants.Engine.MAX_BET) + ' bits');
+            if (bet > AppConstants.Engine.MAX_BET)
+                return new Error('The bet must be less no more than ' + formatSatoshis(AppConstants.Engine.MAX_BET) + ' rais');
 
             if (_.isNaN(bet) || Math.floor(bet) !== bet)
                 return new Error('The bet should be an integer greater than or equal to one');
@@ -152,9 +152,9 @@ define([
             return typeof nVal === "number" && isFinite(nVal) && nVal > -9007199254740992 && nVal < 9007199254740992;
         },
 
-        //Returns plural or singular, for a given amount of bits.
-        grammarBits: function (bits) {
-            return bits <= 100 ? 'bit' : 'bits';
+        //Returns plural or singular, for a given amount of rais.
+        grammarRais: function (rais) {
+            return rais <= 1 ? 'rai' : 'rais';
         },
 
         //Calculate the payout based on the time

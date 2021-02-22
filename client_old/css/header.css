@@ -56,7 +56,7 @@
     /* margin-left: 1rem; */
 }
 
-.nav-top-bar .balance-bits {
+.nav-top-bar .balance-rais {
     color: black;
     /* margin-right: 1rem; */
     font-size: 20px;
@@ -65,7 +65,7 @@
     padding-right: 10px;
 }
 
-.nav-top-bar .balance-bits span {
+.nav-top-bar .balance-rais span {
     /* display: block; */
     line-height: 40px;
 

@@ -3,6 +3,7 @@ var async = require('async');
 //var bitcoinjs = require('bitcoinjs-lib');
 var request = require('request');
 const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
+var date = require('date-fns');
 var lib = require('./lib');
 var database = require('./database');
 var withdraw = require('./withdraw');
@@ -19,6 +20,34 @@ var sessionOptions = {
     httpOnly: true,
     secure : config.PRODUCTION
 };
+
+
+function humanReadableDate(comparisonDate) {
+    const today = new Date();
+    const yesterday = date.subDays(today, 1);
+    const aWeekAgo = date.subDays(today, 7);
+    const twoWeeksAgo = date.subDays(today, 14);
+    const threeWeeksAgo = date.subDays(today, 21);
+
+    // Get the date in English locale to match English day of week keys
+    const compare = date.parseISO(comparisonDate);
+
+    let result = '';
+    if (date.isSameDay(compare, today)) {
+        result = intl.t('Updated.Today');
+    } else if (date.isSameDay(compare, yesterday)) {
+        result = intl.t('Updated.Yesterday');
+    } else if (date.isAfter(compare, aWeekAgo)) {
+        result = intl.t(`Updated.${date.formatDate(compare, 'EEEE')}`);
+    } else if (date.isAfter(compare, twoWeeksAgo)) {
+        result = intl.t('Updated.LastWeek');
+    } else if (date.isAfter(compare, threeWeeksAgo)) {
+        result = intl.t('Updated.TwoWeeksAgo');
+    }
+    console.log(result);
+    return result;
+}
+
 
 /**
  * POST
@@ -215,7 +244,7 @@ exports.profile = function(req, res, next) {
             assert(plays);
 
             plays.forEach(function(play) {
-                play.timeago = rtf1.format(play.created);
+                play.timeago = humanReadableDate(play.created);
             });
 
             var previousPage;
@@ -256,7 +285,7 @@ exports.profile = function(req, res, next) {
 
 /**
  * GET
- * Shows the request bits page
+ * Shows the request rais page
  * Restricted API to logged users
  **/
 exports.request = function(req, res) {
@@ -286,7 +315,7 @@ exports.giveawayRequest = function(req, res, next) {
             return next(new Error('Unable to add giveaway: \n' + err));
         }
         user.eligible = 240;
-        user.balance_satoshis += 200;
+        user.balance_rais += 2;
         return res.redirect('/play?m=received');
     });
 

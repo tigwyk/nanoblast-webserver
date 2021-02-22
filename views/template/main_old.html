@@ -21,21 +21,21 @@
             </div>
         {{??it.user.advice == 'new'}}
         <div class="success">
-            Welcome to nanoblast, to start you have 2 free mNano, bits
+            Welcome to nanoblast, to start you have 2 free rai, rais
             <a href="/request">you can request them here</a> or you can just watch the current games... have fun :D
 
         </div>
         {{??it.user.advice == 'received'}}
         <div class="success">
-            Congratulations you have been credited 2 free mNano. Have fun!
+            Congratulations you have been credited 2 free rai. Have fun!
         </div>
         {{?? it.user.advice}}
         <div class="success">
            {{!it.user.advice}}
         </div>
-        {{??it.user && it.user.balance_satoshis < 100 }}
+        {{??it.user && it.user.balance_rais < 1 }}
             {{?it.user.eligible == true}}
-                <div class="success"><a href="/request">Collect your two free mNano!</a></div>
+                <div class="success"><a href="/request">Collect your two free rai!</a></div>
             {{?}}
         {{?}}
 

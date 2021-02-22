@@ -19,9 +19,9 @@ define([
 
     //Update the balance in an ugly way TODO: Improve
     Engine.on('all', function() {
-        var elem = document.getElementById('balance_bits');
+        var elem = document.getElementById('balance_rais');
         if (elem)
-            elem.innerHTML = Clib.formatSatoshis(Engine.balanceSatoshis, 2);
+            elem.innerHTML = Clib.formatSatoshis(Engine.balanceRais, 2);
         else
             console.log('[main] No balance container');
     });

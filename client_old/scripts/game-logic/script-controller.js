@@ -167,7 +167,7 @@ define([
      * Gets the current balance
      */
     ScriptExecutor.prototype.getBalance = function() {
-        return Engine.balanceSatoshis;
+        return Engine.balanceRais;
     };
 
     /**
