@@ -1,5 +1,5 @@
 var assert = require('assert');
-var nano = require('./nano_client');
+//var nano = require('./nano_client');
 var db = require('./database');
 var request = require('request');
 const dotenv = require('dotenv');
