@@ -174,8 +174,8 @@ module.exports = function(app) {
     app.get('/contact', staticPageLogged('contact'));
     app.get('/request', restrict, user.request);
     //app.get('/deposit', restrict, user.deposit);
-    app.get('/withdraw', restrict, user.withdraw);
-    app.get('/withdraw/request', restrict, user.withdrawRequest);
+    //app.get('/withdraw', restrict, user.withdraw);
+    //app.get('/withdraw/request', restrict, user.withdrawRequest);
     app.get('/support', restrict, user.contact);
     app.get('/account', restrict, user.account);
     app.get('/security', restrict, user.security);
