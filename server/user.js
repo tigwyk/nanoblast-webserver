@@ -1,8 +1,6 @@
 var assert = require('better-assert');
 var async = require('async');
-//var bitcoinjs = require('bitcoinjs-lib');
 var request = require('request');
-const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
 var date = require('date-fns');
 var lib = require('./lib');
 var database = require('./database');

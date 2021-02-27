@@ -173,7 +173,7 @@ module.exports = function(app) {
     app.get('/faq', staticPageLogged('faq'));
     app.get('/contact', staticPageLogged('contact'));
     app.get('/request', restrict, user.request);
-    app.get('/deposit', restrict, user.deposit);
+    //app.get('/deposit', restrict, user.deposit);
     app.get('/withdraw', restrict, user.withdraw);
     app.get('/withdraw/request', restrict, user.withdrawRequest);
     app.get('/support', restrict, user.contact);
@@ -182,8 +182,6 @@ module.exports = function(app) {
     app.get('/forgot-password', staticPageLogged('forgot-password'));
     app.get('/calculator', staticPageLogged('calculator'));
     app.get('/guide', staticPageLogged('guide'));
-
-    //app.get('/test', myTester, (req, res, next) => res.render('index'));
 
     app.get('/play-old', table());
     app.get('/play', tableNew());

@@ -1,8 +1,6 @@
  var assert = require('better-assert');
  var async = require('async');
- //var timeago = require('timeago');
  var database = require('./database');
- const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
 
  /**
   * GET
