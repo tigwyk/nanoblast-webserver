@@ -18,7 +18,7 @@ body {
 }
 
 a {
-    color: #e58929;
+    color: #4A90E2;
     text-decoration: none;
     line-height: inherit;
     cursor: pointer;
@@ -30,7 +30,7 @@ a:hover {
     -o-transition: all 0.1s linear;
     -ms-transition: all 0.1s linear;
     transition: all 0.1s linear;
-    color: #c87629;
+    color: #000034;
 }
 
 b {
