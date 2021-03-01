@@ -142,7 +142,7 @@
 
 #games-log-container .games-log tbody tr:hover {
     color: black;
-    background: rgba(255, 129, 0 , .4);
+    background: rgba(74, 144, 226, .4);
 }
 
 #games-log-container .games-log a {

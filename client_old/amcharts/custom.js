@@ -51,18 +51,18 @@ function CustomChart(startingFrom, cum, chartData) {
                 {
                     "axisAlpha": 0,
                     "inside": true,
-                    "title": 'Cumulative Net Profit'
+                    "title": "Cumulative Net Profit"
                 }
             ],
             "graphs": [
                 {
                     "useNegativeColorIfDown": true,
 
-                    "bullet": "round",
+                    "bullet": "diamond",
                     "bulletBorderAlpha": 1,
                     "bulletBorderColor": "#FFFFFF",
                     "balloonFunction": frmt,
-                    "lineThickness": 2,
+                    "lineThickness": 3,
                     "lineColor": "green",
                     "negativeLineColor": "red",
                     "valueField": "cum_profit",

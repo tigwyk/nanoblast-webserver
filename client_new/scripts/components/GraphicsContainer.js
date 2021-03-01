@@ -112,7 +112,7 @@ define([
                     )
                 ),
                 D.div({ className: 'max-profit' },
-                    'Max profit: ', (Engine.maxWin/1e6).toFixed(4), ' NANO'
+                    'Max profit: ', (Engine.maxWin/1e8).toFixed(4), ' NANO'
                 ),
                 D.div({ className: 'highest-multi' },
                     'Highest 💥@', Engine.highestMulti, 'x'

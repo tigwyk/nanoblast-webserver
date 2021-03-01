@@ -264,16 +264,16 @@ define([
 
         if(Engine.gameState === 'IN_PROGRESS') {
 
-            if (StateLib.currentlyPlaying(Engine))
+            if (StateLib.currentlyPlaying(Engine)) {
                 if(this.lastGameWon && (Clib.payout(this.betSize, t) > this.lastWinnings) && !greenSetted) {
                     this.ctx.fillStyle = 'green';
                     greenSetted = true;
                 } else {
                     this.ctx.fillStyle = '#7cba00';
                 }
-            else
+            } else {
                 this.ctx.fillStyle = (this.themeWhite? "black" : "#b0b3c1");
-
+            }
             this.ctx.font = fontSizePx(20) + " Arial Black";
             this.ctx.fillText(parseFloat(this.currentGamePayout).toFixed(2) + 'x', this.canvasWidth/2, this.canvasHeight/2);
         }
