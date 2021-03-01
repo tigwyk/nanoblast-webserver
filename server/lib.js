@@ -77,10 +77,6 @@ exports.isEligibleForGiveAway = function(lastGiveAway) {
     return Math.round(60 - timeElapsed);
 };
 
-var derivedPubKey = config.BIP32_DERIVED || "123456";
-if (!derivedPubKey)
-    throw new Error('Must set env var BIP32_DERIVED_KEY');
-
 var accountSeed = config.NANO_ACCOUNT_SEED;
 if (!accountSeed)
     throw new Error('Must set env var NANO_ACCOUNT_SEED');
@@ -94,11 +90,11 @@ exports.deriveAddress = function(index) {
     //return "bitcoinplaceholderaddress"
 };
 
-exports.formatSatoshis = function(n, decimals) {
+exports.formatRais = function(n, decimals) {
     if (typeof decimals === 'undefined')
         decimals = 2;
 
-    return (n/100).toFixed(decimals).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    return (n).toFixed(decimals).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 };
 
 exports.isInt = function isInteger (nVal) {

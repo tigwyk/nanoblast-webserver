@@ -17,7 +17,7 @@ define([
 
     function getState() {
         return {
-            balanceRaisFormatted: Clib.formatSatoshis(Engine.balanceRais),
+            balanceRaisFormatted: Clib.formatRais(Engine.balanceRais),
             //balanceRaisFormatted: Engine.balanceRais,
             theme: GameSettingsStore.getCurrentTheme()//black || white
         }

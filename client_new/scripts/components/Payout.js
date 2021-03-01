@@ -44,7 +44,7 @@ define([
         render: function() {
             var decimals = StateLib.currentPlay(this.props.engine).bet < 10000 ? 2 : 0;
 
-            return D.span({ id: 'payout' }, Clib.formatSatoshis(this.state.payout, decimals));
+            return D.span({ id: 'payout' }, Clib.formatRais(this.state.payout, decimals));
         }
     });
 

@@ -23,7 +23,7 @@ define([
         _betInvalid = false;
 
     //Cashout Number
-    var _cashOut = Clib.localOrDef('cashOut', '2.00');
+    var _cashOut = Clib.localOrDef('cashOut', '100');
     var _cashOutInvalid; //false || string error message
     var co = Clib.parseAutoCash(_cashOut);
     if(co instanceof Error)

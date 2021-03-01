@@ -52,7 +52,7 @@ define([
 
                 var bet;
                 if(this.props.engine.nextBetAmount) //If the bet is queued
-                    bet = Clib.formatSatoshis(this.props.engine.nextBetAmount, 0) + ' ' + Clib.grammarRais(this.props.engine.nextBetAmount);
+                    bet = Clib.formatRais(this.props.engine.nextBetAmount, 0) + ' ' + Clib.grammarRais(this.props.engine.nextBetAmount);
 
                 var msg = null;
                 if (aco)

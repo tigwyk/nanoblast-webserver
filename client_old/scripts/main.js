@@ -21,7 +21,7 @@ define([
     Engine.on('all', function() {
         var elem = document.getElementById('balance_rais');
         if (elem)
-            elem.innerHTML = Clib.formatSatoshis(Engine.balanceRais, 2);
+            elem.innerHTML = Clib.formatRais(Engine.balanceRais, 2);
         else
             console.log('[main] No balance container');
     });

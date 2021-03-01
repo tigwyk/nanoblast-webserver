@@ -10,7 +10,7 @@ define([
 
     var rng;
 
-    function formatSatoshis(n, decimals) {
+    function formatRais(n, decimals) {
         return formatDecimals(n, decimals);
     }
 
@@ -25,7 +25,7 @@ define([
     }
 
     return {
-        formatSatoshis: formatSatoshis,
+        formatRais: formatRais,
 
         formatDecimals: formatDecimals,
 
@@ -53,7 +53,7 @@ define([
                 return new Error('The bet should be at least 1 rai');
 
             if (bet > AppConstants.Engine.MAX_BET)
-                return new Error('The bet must be less no more than ' + formatSatoshis(AppConstants.Engine.MAX_BET) + ' rais');
+                return new Error('The bet must be less no more than ' + formatRais(AppConstants.Engine.MAX_BET) + ' rais');
 
             if (_.isNaN(bet) || Math.floor(bet) !== bet)
                 return new Error('The bet should be an integer greater than or equal to one');

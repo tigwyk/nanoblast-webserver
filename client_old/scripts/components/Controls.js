@@ -149,7 +149,7 @@ define([
                     return D.span(null, 'Cashed Out @  ',
                         D.b({className: 'green'}, pi.stopped_at / 100, 'x'),
                         ' / Won: ',
-                        D.b({className: 'green'}, Clib.formatSatoshis(pi.bet * pi.stopped_at / 100)),
+                        D.b({className: 'green'}, Clib.formatRais(pi.bet * pi.stopped_at / 100)),
                         ' ', Clib.grammarRais(pi.bet * pi.stopped_at / 100)
                     );
 
@@ -163,7 +163,7 @@ define([
 
                     if (pi.bonus) {
                         bonus = D.span(null, ' (+',
-                            Clib.formatSatoshis(pi.bonus), ' ',
+                            Clib.formatRais(pi.bonus), ' ',
                             Clib.grammarRais(pi.bonus), ' bonus)'
                         );
                     }
@@ -171,7 +171,7 @@ define([
                     return D.span(null, 'Cashed Out @ ',
                         D.b({className: 'green'}, pi.stopped_at / 100, 'x'),
                         ' / Won: ',
-                        D.b({className: 'green'}, Clib.formatSatoshis(pi.bet * pi.stopped_at / 100)),
+                        D.b({className: 'green'}, Clib.formatRais(pi.bet * pi.stopped_at / 100)),
                         ' ', Clib.grammarRais(pi.bet * pi.stopped_at / 1000),
                         bonus
                     );
@@ -179,7 +179,7 @@ define([
 
                     if (pi.bonus) {
                         bonus = D.span(null, ' (+ ',
-                            Clib.formatSatoshis(pi.bonus), ' ',
+                            Clib.formatRais(pi.bonus), ' ',
                             Clib.grammarRais(pi.bonus), ' bonus)'
                         );
                     }
