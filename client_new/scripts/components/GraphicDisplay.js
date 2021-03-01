@@ -203,7 +203,7 @@ define([
 
         this.ctx.lineWidth=1;
         this.ctx.strokeStyle = (this.themeWhite? "Black" : "#b0b3c1");
-        this.ctx.font="10px Verdana";
+        this.ctx.font="10px Arial Black";
         this.ctx.fillStyle = (this.themeWhite? 'black' : "#b0b3c1");
         this.ctx.textAlign="center";
 
@@ -265,11 +265,16 @@ define([
         if(Engine.gameState === 'IN_PROGRESS') {
 
             if (StateLib.currentlyPlaying(Engine))
-                this.ctx.fillStyle = '#7cba00';
+                if(this.lastGameWon && (Clib.payout(this.betSize, t) > this.lastWinnings) && !greenSetted) {
+                    this.ctx.fillStyle = 'green';
+                    greenSetted = true;
+                } else {
+                    this.ctx.fillStyle = '#7cba00';
+                }
             else
                 this.ctx.fillStyle = (this.themeWhite? "black" : "#b0b3c1");
 
-            this.ctx.font = fontSizePx(20) + " Verdana";
+            this.ctx.font = fontSizePx(20) + " Arial Black";
             this.ctx.fillText(parseFloat(this.currentGamePayout).toFixed(2) + 'x', this.canvasWidth/2, this.canvasHeight/2);
         }
 
@@ -284,7 +289,7 @@ define([
         }
 
         if(Engine.gameState === 'STARTING') {
-            this.ctx.font = fontSizePx(5) + " Verdana";
+            this.ctx.font = fontSizePx(5) + " Arial Black";
             this.ctx.fillStyle = "grey";
 
             var timeLeft = ((Engine.startTime - Date.now())/1000).toFixed(1);
