@@ -275,10 +275,12 @@ define([
 
         //If the engine enters in the room @ ENDED it doesn't have the crash value, so we don't display it
         if(Engine.gameState === 'ENDED') {
-            this.ctx.font = fontSizePx(15) + " Verdana";
+            this.ctx.font = fontSizePx(15) + " Arial Black";
             this.ctx.fillStyle = "red";
-            this.ctx.fillText('BANG!', this.canvasWidth/2, this.canvasHeight/2 - fontSizeNum(15)/2);
-            this.ctx.fillText('@ ' + Clib.formatDecimals(Engine.tableHistory[0].game_crash/100, 2) + 'x', this.canvasWidth/2, this.canvasHeight/2 + fontSizeNum(15)/2);
+            //this.ctx.fillText('BANG!', this.canvasWidth/2, this.canvasHeight/2 - fontSizeNum(15)/2);
+            this.ctx.fillText('💥', this.canvasWidth/2, this.canvasHeight/2 - fontSizeNum(15)/2);
+            //this.ctx.fillText('@ ' + Clib.formatDecimals(Engine.tableHistory[0].game_crash/100, 2) + 'x', this.canvasWidth/2, this.canvasHeight/2 + fontSizeNum(15)/2);
+            this.ctx.fillText(Clib.formatDecimals(Engine.tableHistory[0].game_crash/100, 2) + 'x', this.canvasWidth/2, this.canvasHeight/2 + fontSizeNum(15)/2);
         }
 
         if(Engine.gameState === 'STARTING') {
