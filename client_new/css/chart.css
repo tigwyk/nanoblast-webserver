@@ -41,13 +41,23 @@
     color: rgb(76, 75, 75);
 }
 
+#chart-inner-container .highest-multi {
+    position: absolute;
+    /* bottom: 0; */
+    top: 0;
+    /* right: 10%; */
+    left: 80%;
+    font-size: 1rem;
+    color: rgb(103, 102, 134);
+}
+
 #chart-inner-container canvas.hide {
     display: none;
 }
 
 /** Small screen and small controls **/
 @media handheld, only screen and (max-width: 767px) {
-    #chart-inner-container.small .max-profit {
+    #chart-inner-container.small .max-profit .highest-multi{
 
     }
 }

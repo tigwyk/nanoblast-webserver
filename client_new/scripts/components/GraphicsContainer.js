@@ -112,7 +112,10 @@ define([
                     )
                 ),
                 D.div({ className: 'max-profit' },
-                    'Max profit: ', (Engine.maxWin/1e8).toFixed(4), ' BTC'
+                    'Max profit: ', (Engine.maxWin/1e6).toFixed(4), ' NANO'
+                ),
+                D.div({ className: 'highest-multi' },
+                    'Highest 💥@', Engine.highestMulti, 'x'
                 ),
                 D.canvas({ ref: 'canvas', className: ((this.state.graphMode === 'text')? 'hide': '') }),
                 textDisplay

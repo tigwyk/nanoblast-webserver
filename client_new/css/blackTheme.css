@@ -291,7 +291,7 @@ body {
    chart.css
    ========================================================================== */
 
-#chart-inner-container .max-profit {
+#chart-inner-container .max-profit .highest-multi {
     color: white;
 }
 

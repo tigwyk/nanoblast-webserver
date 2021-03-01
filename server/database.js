@@ -237,7 +237,7 @@ function createSession(client, userId, ipAddress, userAgent, remember, callback)
 }
 
 exports.createOneTimeToken = function(userId, ipAddress, userAgent, callback) {
-    console.log("creating OneTimeToken");
+    //console.log("creating OneTimeToken");
     assert(userId);
     var id = uuid.v4();
 
@@ -314,7 +314,7 @@ exports.getUserBySessionId = function(sessionId, callback) {
         assert(data.length === 1);
 
         var user = data[0];
-        console.log("User: ",user);
+        //console.log("User: ",user);
         assert(typeof user.balance_rais === 'number');
 
         callback(null, user);

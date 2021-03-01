@@ -79,6 +79,9 @@ define([
         /** How much can be won this game */
         self.maxWin = null;
 
+        /** The highest multiplier we've ever recorded */
+        self.highestMulti = null;
+
         /**
          * Client side times:
          * if the game is pending, startTime is how long till it starts
@@ -253,9 +256,8 @@ define([
                 game_crash: data.game_crash,
                 game_id: self.gameId,
                 hash: data.hash,
-                player_info: self.playerInfo
+                player_info: self.playerInfo,
             };
-
 
             //Add the current game info to the game history and if the game history is larger than 40 remove one element
             if (self.tableHistory.length >= 40)
@@ -288,6 +290,8 @@ define([
             self.timeTillStart = info.time_till_start;
             self.startTime = new Date(Date.now() + info.time_till_start);
             self.maxWin = info.max_win;
+            self.highestMulti = ((info.highest_multi > 0) ? info.highest_multi * 0.01 : 0);
+            //console.log("Highest multiplier: ",self.highestMulti,"x");
 
             // Every time the game starts checks if there is a queue bet and send it
             if (self.nextBetAmount) {
