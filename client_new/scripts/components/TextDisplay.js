@@ -96,8 +96,8 @@ define([
                     break;
                 case 'ENDED':
                     content = D.div({ id: cId, className: 'ended', style: { fontSize: this.state.size.ended, color: 'red' } },
-                        D.span({ className: 'busted' }, 'Busted'),
-                        D.span({ className: 'at' }, '@ ' + Clib.formatDecimals(Engine.tableHistory[0].game_crash/100, 2) + 'x')
+                        D.span({ className: 'busted' }, '💥'),
+                        D.span({ className: 'at' }, Clib.formatDecimals(Engine.tableHistory[0].game_crash/100, 2) + 'x')
                     );
                     break;
                 case 'STARTING':
