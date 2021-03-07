@@ -113,7 +113,7 @@ define([
                         break;
                     case 'newUser':
                         messageContent = D.span(null,
-                            D.a({ href: "/request" }, "Welcome to Nanoblast, to start you have 2 free rais, rais you can request them here or you can just watch the current games... have fun :D")
+                            D.a({ href: "/request" }, "Welcome to Nanoblast, to start you have 200 free rais, rais you can request them here or you can just watch the current games... have fun :D")
                         );
                         messageClass = 'new-user';
                         break;
@@ -131,7 +131,7 @@ define([
                         break;
                     case 'collect':
                         messageContent = D.span(null,
-                            D.a({ href: '/request' }, 'Collect your two free rais!')
+                            D.a({ href: '/request' }, 'Collect your 200 free rais!')
                         );
                         messageClass = 'collect';
                         break;
