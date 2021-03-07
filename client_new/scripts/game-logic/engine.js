@@ -340,12 +340,14 @@ define([
 
             if (self.username === resp.username) {
                 self.cashingOut = false;
+                /*
                 console.log("We stopped_at (raw from gameserver): ",resp.stopped_at);
                 console.log("Our bet was: ",self.playerInfo[resp.username].bet);
                 console.log("Amount: ",self.playerInfo[resp.username].bet * resp.stopped_at/100);
                 console.log("Updating player's balance from: ",self.balanceRais);
+                */
                 self.balanceRais += self.playerInfo[resp.username].bet * resp.stopped_at/100;
-                console.log("... to: ",self.balanceRais);
+                //console.log("... to: ",self.balanceRais);
             }
 
             self.calcBonuses();
