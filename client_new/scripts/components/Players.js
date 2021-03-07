@@ -128,7 +128,7 @@ define([
                             user.username)),
                         D.td(null, '-'),
                         D.td(null,
-                            user.bet ? Clib.formatRais(user.bet, 0) : '?'
+                            user.bet ? Clib.formatDecimals(user.bet, 0) : '?'
                         ),
                         D.td({ className: bonusClass }, bonus),
                         D.td(null, '-')
@@ -153,9 +153,9 @@ define([
                             },
                             user.username)),
                         D.td(null, user.stopped_at/100 + 'x'),
-                        D.td(null, Clib.formatRais(user.bet, 0)),
+                        D.td(null, Clib.formatDecimals(user.bet, 0)),
                         D.td({ className: bonusClass }, bonus),
-                        D.td(null, Clib.formatRais(profit))
+                        D.td(null, Clib.formatDecimals(profit,0))
                     ));
                 }
 
@@ -173,10 +173,10 @@ define([
                     var profit = -bet;
 
                     if (bonus) {
-                        profit = Clib.formatRais(profit + bonus);
+                        profit = Clib.formatDecimals(profit + bonus,0);
                         bonus = Clib.formatDecimals(bonus*100/bet, 2)+'%';
                     } else {
-                        profit = Clib.formatRais(profit);
+                        profit = Clib.formatDecimals(profit,0);
                         bonus = '0%';
                     }
 
@@ -191,7 +191,7 @@ define([
                             },
                             entry.username)),
                         D.td(null, '-'),
-                        D.td(null, Clib.formatRais(entry.bet, 0)),
+                        D.td(null, Clib.formatDecimals(entry.bet, 0)),
                         D.td(null, bonus),
                         D.td(null, profit)
                     );
@@ -204,10 +204,10 @@ define([
                     var profit = bet * (stopped - 100) / 100;
 
                     if (bonus) {
-                        profit = Clib.formatRais(profit + bonus);
+                        profit = Clib.formatDecimals(profit + bonus,0);
                         bonus = Clib.formatDecimals(bonus*100/bet, 2)+'%';
                     } else {
-                        profit = Clib.formatRais(profit);
+                        profit = Clib.formatDecimals(profit,0);
                         bonus = '0%';
                     }
 
@@ -223,8 +223,8 @@ define([
                                 target: '_blank'
                             },
                             entry.username)),
-                        D.td(null, stopped / 100, 'x'),
-                        D.td(null, Clib.formatRais(bet, 0)),
+                        D.td(null, Clib.formatDecimals(stopped / 100,2), 'x'),
+                        D.td(null, Clib.formatDecimals(bet, 0)),
                         D.td(null, bonus),
                         D.td(null, profit)
                     );

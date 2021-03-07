@@ -100,7 +100,7 @@ define([
         canUserBet: function(balanceRais, betStringRais, betInvalid, autoCashOutInvalid) {
             var betAmountRais = this.parseBet(betStringRais);
 
-            if(balanceRais < 1)
+            if(balanceRais < 100)
                 return new Error('Not enough rais to play');
             if(betInvalid)
                 return new Error(betInvalid);

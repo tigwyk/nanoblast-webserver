@@ -290,7 +290,7 @@ define([
             self.timeTillStart = info.time_till_start;
             self.startTime = new Date(Date.now() + info.time_till_start);
             self.maxWin = info.max_win;
-            self.highestMulti = ((info.highest_multi > 0) ? info.highest_multi * 0.01 : 0);
+            self.highestMulti = ((info.highest_multi > 0) ? info.highest_multi/100 : 0);
             //console.log("Highest multiplier: ",self.highestMulti,"x");
 
             // Every time the game starts checks if there is a queue bet and send it
@@ -340,7 +340,12 @@ define([
 
             if (self.username === resp.username) {
                 self.cashingOut = false;
-                self.balanceRais += self.playerInfo[resp.username].bet * resp.stopped_at / 100;
+                console.log("We stopped_at (raw from gameserver): ",resp.stopped_at);
+                console.log("Our bet was: ",self.playerInfo[resp.username].bet);
+                console.log("Amount: ",self.playerInfo[resp.username].bet * resp.stopped_at/100);
+                console.log("Updating player's balance from: ",self.balanceRais);
+                self.balanceRais += self.playerInfo[resp.username].bet * resp.stopped_at/100;
+                console.log("... to: ",self.balanceRais);
             }
 
             self.calcBonuses();
@@ -469,10 +474,10 @@ define([
         amount = Number(amount);
         console.assert(typeof amount == 'number');
         console.assert(Clib.isInteger(amount));
-        console.assert(!autoCashOut || (typeof autoCashOut === 'number' && autoCashOut >= 1));
+        console.assert(!autoCashOut || (typeof autoCashOut === 'number' && autoCashOut >= 100));
 
-        if(!Clib.isInteger(amount))
-            return console.error('The bet amount should be integer');
+        if(!Clib.isInteger(amount) || !((amount%100) == 0))
+            return console.error('The bet amount should be integer and divisible by 1');
 
         this.nextBetAmount = amount;
         this.nextAutoCashout = autoCashOut;
@@ -587,7 +592,7 @@ define([
         //Get max bet and bonus pool
         for (var i = 0, length = playersArrSorted.length; i < length; ++i) {
             var bet = playersArrSorted[i].bet;
-            bonusPool += bet / 100;
+            bonusPool += bet * 0.01;
             largestBet = Math.max(largestBet, bet);
         }
 

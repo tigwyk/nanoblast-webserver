@@ -42,9 +42,10 @@ define([
         },
 
         render: function() {
-            var decimals = StateLib.currentPlay(this.props.engine).bet < 10000 ? 2 : 0;
+            //var decimals = StateLib.currentPlay(this.props.engine).bet < 10000 ? 2 : 0;
+            var decimals = 0;
 
-            return D.span({ id: 'payout' }, Clib.formatRais(this.state.payout, decimals));
+            return D.span({ id: 'payout' }, Clib.formatDecimals(this.state.payout, decimals));
         }
     });
 

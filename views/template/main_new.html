@@ -21,19 +21,19 @@
     </div>
     {{??it.user.advice == 'new'}}
     <div class="success-wrap">
-        Welcome to nanoblast, to start you have 2 free rai, rai
+        Welcome to nanoblast, to start you have 200 free rais, rai
         <a href="/request">you can request them here</a> or you can just watch the current games... have fun :D
 
     </div>
     {{??it.user.advice == 'received'}}
     <div class="success-wrap">
-        Congratulations you have been credited 2 free rai. Have fun!
+        Congratulations you have been credited 200 free rai. Have fun!
     </div>
     {{?? it.user.advice}}
     <div class="success-wrap">
         {{!it.user.advice}}
     </div>
-    {{??it.user && it.user.balance_rais < 1 }}
+    {{??it.user && it.user.balance_rais < 100 }}
     {{?it.user.eligible == true}}
     <div class="success-wrap"><a href="/request">Collect your free rai!</a></div>
     {{?}}

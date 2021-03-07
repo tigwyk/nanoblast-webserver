@@ -133,12 +133,12 @@ define([
 
         //Playing and not cashed out
         if(StateLib.currentlyPlaying(Engine)) {
-            this.ctx.lineWidth = 6;
+            this.ctx.lineWidth = 8;
             this.ctx.strokeStyle = '#7cba00';
 
         //Cashing out
         } else if(Engine.cashingOut) {
-            this.ctx.lineWidth=6;
+            this.ctx.lineWidth=8;
             //this.ctx.strokeStyle = "Grey";
 
         } else {

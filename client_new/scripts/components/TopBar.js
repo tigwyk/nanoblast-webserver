@@ -17,7 +17,7 @@ define([
 
     function getState() {
         return {
-            balanceRaisFormatted: Clib.formatRais(Engine.balanceRais),
+            balanceRaisFormatted: Clib.formatDecimals(Engine.balanceRais,0),
             //balanceRaisFormatted: Engine.balanceRais,
             theme: GameSettingsStore.getCurrentTheme()//black || white
         }

@@ -49,14 +49,14 @@ define([
 
             var bet = parseInt(betString.replace(/k/g, '000'));
 
-            if (bet < 1)
-                return new Error('The bet should be at least 1 rai');
+            if (bet < 100)
+                return new Error('The bet should be at least 100 rais');
 
             if (bet > AppConstants.Engine.MAX_BET)
-                return new Error('The bet must be less no more than ' + formatRais(AppConstants.Engine.MAX_BET) + ' rais');
+                return new Error('The bet must be less than ' + formatDecimals(AppConstants.Engine.MAX_BET,0) + ' rais');
 
             if (_.isNaN(bet) || Math.floor(bet) !== bet)
-                return new Error('The bet should be an integer greater than or equal to one');
+                return new Error('The bet should be a whole number');
 
             return bet;
         },

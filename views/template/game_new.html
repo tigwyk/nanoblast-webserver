@@ -29,7 +29,7 @@
             {{?? it.user.advice}}
                 USER_MESSAGE.type = 'advice';
                 USER_MESSAGE.text = "{{!it.user.advice}}";
-            {{?? it.user && it.user.balance_rais < 1}}
+            {{?? it.user && it.user.balance_rais < 100}}
                 {{? it.user.eligible == true}}
                     USER_MESSAGE.type = 'collect';
                     USER_MESSAGE.qty = 2;
