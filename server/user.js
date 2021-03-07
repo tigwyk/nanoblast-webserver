@@ -313,7 +313,7 @@ exports.giveawayRequest = function(req, res, next) {
             return next(new Error('Unable to add giveaway: \n' + err));
         }
         user.eligible = 240;
-        user.balance_rais += 2;
+        user.balance_rais += 200;
         return res.redirect('/play?m=received');
     });
 

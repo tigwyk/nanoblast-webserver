@@ -36,12 +36,12 @@
         <div class="small-10 columns sets-content">
             <h5>Request Free Rais</h5>
                 {{?typeof it.user.eligible !== 'number'}}
-                    <p class="small ">**Every hour you are able to request 2 free rais, just claim them!</p>
+                    <p class="small ">**Every hour you are able to request 200 free rais, just claim them!</p>
                     <form class="giveaway-form" action="/request" method="post" id="faucetForm">
                         <div class="g-recaptcha" data-sitekey="{{=it.recaptchaKey}}" data-callback="sub"></div>
                     </form>
                 {{??}}
-                    <h4>You will be eligible for a free 2 rais in {{=it.user.eligible}} minutes</h4>
+                    <h4>You will be eligible for a free 200 rais in {{=it.user.eligible}} minutes</h4>
                 {{?}}
         </div>
     </div>
