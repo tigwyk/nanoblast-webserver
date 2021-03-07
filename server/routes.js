@@ -183,8 +183,8 @@ module.exports = function(app) {
     app.get('/calculator', staticPageLogged('calculator'));
     app.get('/guide', staticPageLogged('guide'));
 
-    app.get('/play-old', table());
-    app.get('/play', tableNew());
+    //app.get('/play-old', table());
+    app.get('/play', restrict, tableNew());
     app.get('/play-id/:id', tableDev());
 
     app.get('/leaderboard', games.getLeaderBoard);
