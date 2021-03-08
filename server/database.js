@@ -73,11 +73,11 @@ exports.query = query;
 // callback takes (err, data)
 
 function getClient(runner, callback) {
-    console.log("Entering database.getClient");
+    //console.log("Entering database.getClient");
     doIt();
 
     function doIt() {
-        console.log("Entering database.getClient.doIt");
+        //console.log("Entering database.getClient.doIt");
         connect(function (err, client, done) {
             if (err) return callback(err);
 
@@ -116,7 +116,7 @@ function getClient(runner, callback) {
 //Returns a sessionId
 exports.createUser = function(username, password, email, ipAddress, userAgent, callback) {
     assert(username && password);
-    console.log("Entering database.createUser");
+    //console.log("Entering database.createUser");
     getClient(
         function(client, callback) {
             var hashedPassword = passwordHash.generate(password);
