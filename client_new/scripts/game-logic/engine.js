@@ -401,8 +401,9 @@ define([
                             console.error('Error when joining the game...', err);
                             return;
                         }
-
+                        //console.log("Balance before joining...", self.balanceRais);
                         self.balanceRais = resp.balance_rais;
+                        //console.log("Balance after joining...", self.balanceRais);
                         //self.chat = resp.chat;
 
                         /** If username is a falsey value the user is not logged in */
